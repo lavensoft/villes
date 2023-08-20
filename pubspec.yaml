@@ -36,6 +36,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   bonfire: ^2.12.7
+  http: any
+  flutter_riverpod: ^2.0.2
+  pedantic: 1.11.0
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +68,7 @@ flutter:
     - assets/images/interiors/
     - assets/images/player/
     - assets/images/accessories/
+    - assets/images/ui/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

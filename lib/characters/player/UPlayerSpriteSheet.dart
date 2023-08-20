@@ -3,8 +3,8 @@
 import 'package:bonfire/bonfire.dart';
 
 class UPlayerSpriteSheet {
-  static double runStepTime = 2;
-  static double idleStepTime = 2;
+  static double runStepTime = .24;
+  static double idleStepTime = .24;
   static String spriteImage = "player/player.png";
 
   static Future<SpriteAnimation> get idleUp => SpriteAnimation.load(

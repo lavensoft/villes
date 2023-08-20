@@ -13,19 +13,22 @@ class Game extends StatefulWidget {
 class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
-    return BonfireWidget(
-      cameraConfig: CameraConfig(
-        zoom: 1,
-        smoothCameraEnabled: true,
-        moveOnlyMapArea: true
+    return Material(
+      child: BonfireWidget(
+        showCollisionArea: true,
+        cameraConfig: CameraConfig(
+          zoom: 1,
+          smoothCameraEnabled: true,
+          moveOnlyMapArea: true
+        ),
+        joystick: JoystickMoveToPosition(
+          enabledMoveCameraWithClick: true,
+          mouseButtonUsedToMoveCamera: MouseButton.left,
+          mouseButtonUsedToMoveToPosition: MouseButton.right,
+        ),
+        map: WorldMapByTiled('maps/PlayerHome1.json', forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom)),
+        player: UPlayer(Vector2(100, 100)),
       ),
-      joystick: JoystickMoveToPosition(
-        enabledMoveCameraWithClick: true,
-        mouseButtonUsedToMoveCamera: MouseButton.left,
-        mouseButtonUsedToMoveToPosition: MouseButton.right,
-      ),
-      map: WorldMapByTiled('maps/PlayerHome1.json', forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom)),
-      player: UPlayer(Vector2(100, 100)),
     );
   }
 }

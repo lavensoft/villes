@@ -1,0 +1,5 @@
+class ShyftToken {
+  static burn() {
+    
+  }
+}

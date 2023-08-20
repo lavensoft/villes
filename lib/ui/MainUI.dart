@@ -1,5 +1,8 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:ville/api/store/UserStore.dart';
+import 'package:ville/config/Config.dart';
+import 'package:ville/models/main.dart';
 import 'package:ville/widgets/inventory/PlayerInventory.dart';
 import 'package:ville/widgets/main.dart';
 
@@ -12,10 +15,21 @@ class MainUI extends StatefulWidget {
 
 class _MainUIState extends State<MainUI> {
   bool inventoryVisible = false;
+  MPlayer player = MPlayer();
 
   @override
   void initState() {
     super.initState();
+
+    fetchPlayer();
+  }
+
+  void fetchPlayer() async {
+    UserStore.onValue(Config.WALLET_PUBLIC, (p) {
+      setState(() {
+        player = p;
+      });
+    });
   }
 
   @override
@@ -42,7 +56,9 @@ class _MainUIState extends State<MainUI> {
         Positioned(
           left: 32,
           bottom: 106,
-          child: EnergyBar(),
+          child: EnergyBar(
+            value: player.stats?.energy ?? 0
+          ),
         ),
 
         //====== [ACTION BUTTONS] ======

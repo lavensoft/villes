@@ -5,4 +5,7 @@ class  Config {
   static const WALLET_PUBLIC = "7snszC4Q7uCayNX7zZE9THHpeuRE4Mj6qSjmk3ct9MPu";
   static const WALLET_PRIVATE = "HUZFJZBJDvPYi7XwdRyc6j8528ZPXNpGHrdXuFW18cPkbxXwvCmpEj647ZFDBubaTt938iJNYmKU4spdMthiF3V";
   static const WALLET_NETWORK = "devnet";
+
+  //STATS
+  static const PLAYER_MAX_ENERGY = 200;
 }

@@ -1,14 +1,12 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:ville/config/Config.dart';
 
-class EnergyBar extends StatefulWidget {
-  const EnergyBar({ super.key });
+class EnergyBar extends StatelessWidget {
+  const EnergyBar({ super.key, this.value = 0 });
 
-  @override
-  State<EnergyBar> createState() => _EnergyBar();
-}
+  final int value;
 
-class _EnergyBar extends State<EnergyBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +27,7 @@ class _EnergyBar extends State<EnergyBar> {
               bottom: 2,
               child: Container(
                 width: 6,
-                height: 42, // 42 is 100%
+                height: (value * 42) / Config.PLAYER_MAX_ENERGY, // 42 is 100%
                 color: const Color.fromRGBO(24, 225, 68, .6),
               )
             )

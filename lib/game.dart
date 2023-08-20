@@ -1,7 +1,9 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:ville/api/store/UserStore.dart';
 import 'package:ville/characters/player/UPlayer.dart';
 import 'package:ville/config/Config.dart';
+import 'package:ville/models/main.dart';
 import 'package:ville/ui/MainUI.dart';
 
 class Game extends StatefulWidget {
@@ -12,6 +14,23 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
+  @override
+  void initState() {
+    super.initState();
+
+    authClient();
+  }
+
+  void authClient() async {
+    //Register to db
+    await UserStore.register(
+      MPlayer(
+        wallet: Config.WALLET_PUBLIC, 
+        name: "Nhats"
+      )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(

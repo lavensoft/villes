@@ -10,6 +10,8 @@ class MainUI extends StatefulWidget {
 }
 
 class _MainUIState extends State<MainUI> {
+  bool inventoryVisible = false;
+
   @override
   void initState() {
     super.initState();
@@ -21,10 +23,17 @@ class _MainUIState extends State<MainUI> {
       children: [
         //====== [MODAL] ======
         //INVENTORY MODAL
-        const Positioned.fill(
+        Positioned.fill(
           child: Align(
             alignment: Alignment.center,
-            child: PlayerInventory(),
+            child: PlayerInventory(
+              visible: inventoryVisible,
+              onClose: () {
+                setState(() {
+                  inventoryVisible = false;
+                });
+              },
+            ),
           ),
         ),
 
@@ -45,7 +54,11 @@ class _MainUIState extends State<MainUI> {
                   srcSize: Vector2(8, 16),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  inventoryVisible = true;
+                });
+              },
             ),
           ),
         )

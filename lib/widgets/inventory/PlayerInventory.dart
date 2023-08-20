@@ -4,7 +4,10 @@ import 'package:ville/models/MInventoryItem.dart';
 import 'package:ville/widgets/inventory/InventorySlot.dart';
 
 class PlayerInventory extends StatefulWidget {
-  const PlayerInventory({super.key});
+  const PlayerInventory({ super.key, required this.onClose, required this.visible });
+
+  final Function onClose;
+  final bool visible;
 
   @override
   State<PlayerInventory> createState() => _PlayerInventoryState();
@@ -37,19 +40,37 @@ class _PlayerInventoryState extends State<PlayerInventory> {
 
   @override
   Widget build(BuildContext context) {
+    if(!widget.visible) return Container();
+    
     return Container(
       width: 600,
       height: 420,
-      color: Colors.white,
-      child: GridView.count(
-        padding: const EdgeInsets.all(12),
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        crossAxisCount: 6,
-        children: items.map((i) => 
-          InventorySlot(image: Image.network(i.image), amount: i.amount)
-        ).toList()
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12)
       ),
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerRight,
+            child: ElevatedButton(
+              child: Text("X"),
+              onPressed: () => widget.onClose(),
+            ),
+          ),
+          Expanded(
+            child: GridView.count(
+              padding: const EdgeInsets.all(12),
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              crossAxisCount: 6,
+              children: items.map((i) => 
+                InventorySlot(image: Image.network(i.image), amount: i.amount)
+              ).toList()
+            ),
+          )
+        ],
+      )
     );
   }
 }

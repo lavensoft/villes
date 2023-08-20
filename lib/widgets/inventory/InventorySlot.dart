@@ -16,25 +16,24 @@ class InventorySlot extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Stack(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Positioned.fill(
-            child: Align(
-              child: image,
-            ),
+          Align(
+            child: image,
           ),
-          Positioned(
-            bottom: 6,
-            right: 6,
+          Align(
+            alignment: Alignment.center,
             child: Text(
               amount.toString(), 
               style: const TextStyle(
                 color: Colors.black,
-                fontSize: 18,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
-              )
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

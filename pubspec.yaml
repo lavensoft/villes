@@ -39,6 +39,8 @@ dependencies:
   http: any
   flutter_riverpod: ^2.0.2
   pedantic: 1.11.0
+  firebase_core: ^2.15.1
+  firebase_database: ^10.2.5
 
 dev_dependencies:
   flutter_test:

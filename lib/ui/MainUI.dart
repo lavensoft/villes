@@ -1,6 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ville/widgets/inventory/PlayerInventory.dart';
+import 'package:ville/widgets/main.dart';
 
 class MainUI extends StatefulWidget {
   const MainUI({super.key});
@@ -35,6 +36,13 @@ class _MainUIState extends State<MainUI> {
               },
             ),
           ),
+        ),
+
+        //====== [HUB] ======
+        Positioned(
+          left: 32,
+          bottom: 106,
+          child: EnergyBar(),
         ),
 
         //====== [ACTION BUTTONS] ======

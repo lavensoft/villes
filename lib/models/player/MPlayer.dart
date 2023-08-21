@@ -8,6 +8,7 @@ class MPlayer {
   MPlayer({ this.wallet, this.name, this.stats });
 
   toMap() {
+    //!TODO: REMOVE NULL FIELD
     return {
       "wallet": wallet,
       "name": name,

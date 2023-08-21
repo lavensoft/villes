@@ -3,6 +3,7 @@ class MInventoryItem {
   late String image;
   late int amount;
   late String name;
+  late String tokenAddress;
 
-  MInventoryItem(this.id, this.image, this.amount, this.name);
+  MInventoryItem({ this.id = "", this.image = "", this.amount = 0, this.name = "", this.tokenAddress = "" });
 }

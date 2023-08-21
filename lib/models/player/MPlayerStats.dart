@@ -4,7 +4,7 @@ class MPlayerStats {
   MPlayerStats({ this.energy = 0 });
 
   toMap() => {
-    "energy": energy
+    "energy": energy //!TODO: REMOVE NULL FIELD
   };
 
   MPlayerStats fromMap(Map data) {

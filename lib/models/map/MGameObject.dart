@@ -17,7 +17,10 @@ class MGameObject {
     //!TODO: REMOVE NULL FIELD
     return {
       "id": id,
-      "position": position,
+      "position": position != null ? {
+        "x": position?.x,
+        "y": position?.y
+      } : null,
       "owner": owner,
       "properties": properties 
     };
@@ -25,9 +28,12 @@ class MGameObject {
 
   MGameObject fromMap(Map data) {
     id = data["id"];
-    position = data["position"];
     owner = data["owner"];
     properties = data["properties"] ?? {};
+
+    if(data["position"] != null) {
+      position = Vector2(data["position"]["x"] * 1.0, data["position"]["y"] * 1.0);
+    }
 
     return this;
   }

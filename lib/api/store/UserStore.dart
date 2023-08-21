@@ -16,7 +16,7 @@ class UserStore {
     await database.ref("users/${player.wallet}").set(player.toMap());
   }
 
-  static onValue(String wallet, Function(MPlayer) onData) async {
+  static onValue(String wallet, Function(MPlayer) onData) {
     database.ref("users/$wallet").onValue.listen((event) {
       final data = event.snapshot.value;
       if(data != null) {

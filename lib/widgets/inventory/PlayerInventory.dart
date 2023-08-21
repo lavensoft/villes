@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ville/api/main.dart';
-import 'package:ville/api/shyft/Shyft.dart';
 import 'package:ville/models/MInventoryItem.dart';
-import 'package:ville/models/player/MPlayerStats.dart';
 import 'package:ville/widgets/inventory/InventorySlot.dart';
 
 class PlayerInventory extends StatefulWidget {
-  const PlayerInventory({ super.key, required this.onClose, required this.visible, this.onSpawnObject });
+  const PlayerInventory({ super.key, required this.onClose, required this.visible, this.onSpawnBuildObject });
 
   final Function onClose;
   final bool visible;
-  final Function? onSpawnObject;
+  final Function? onSpawnBuildObject;
 
   @override
   State<PlayerInventory> createState() => _PlayerInventoryState();
@@ -104,7 +102,7 @@ class _PlayerInventoryState extends State<PlayerInventory> {
                     eatItem(index, 1);
                   },
                   onPlace: () {
-                    widget.onSpawnObject!(i.id);
+                    widget.onSpawnBuildObject!(i.id);
                     widget.onClose();
                   },
                 );

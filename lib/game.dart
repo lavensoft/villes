@@ -1,16 +1,12 @@
-import 'dart:convert';
-
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ville/api/main.dart';
-import 'package:ville/api/store/UserStore.dart';
 import 'package:ville/characters/player/UPlayer.dart';
 import 'package:ville/config/Config.dart';
-import 'package:ville/enums/EGameObject.dart';
 import 'package:ville/enums/main.dart';
 import 'package:ville/factories/main.dart';
 import 'package:ville/models/main.dart';
-import 'package:ville/objects/interiors/Chair.dart';
+import 'package:ville/objects/GameObject.dart';
 import 'package:ville/ui/MainUI.dart';
 
 class Game extends StatefulWidget {
@@ -23,6 +19,11 @@ class Game extends StatefulWidget {
 class _GameState extends State<Game> {
   var gameController = GameController();
   var worldMap = WorldMapByTiled("maps/PlayerHome1.json", forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom));
+  var mapMeta = MMap(
+    id: Config.WALLET_PUBLIC,
+    mapSrc: "maps/PlayerHome1.json",
+    type: EMapType.IN_DOOR
+  );
 
   @override
   void initState() {
@@ -42,20 +43,29 @@ class _GameState extends State<Game> {
     );
 
     //Register user home map
-    await MapStore.register(
-      MMap(
-        id: Config.WALLET_PUBLIC,
-        mapSrc: "maps/PlayerHome1.json",
-        mapType: EMapType.IN_DOOR
-      )
-    );
+    await MapStore.register(mapMeta);
   }
 
   void loadMap() async {
+    //Load meta
+    MapStore.onValue(Config.WALLET_PUBLIC, EMapType.IN_DOOR, (map) {
+      map.decorations ??= [];
 
+      setState(() {
+        mapMeta = map;
+
+        //Load world map
+        worldMap = WorldMapByTiled(map.mapSrc!, forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom));
+      });
+
+      //Load object
+      for (var e in mapMeta.decorations!) {
+        gameController.addGameComponent(GameObjectFactory.createInstance(e.id!, position: e.position!));
+      }
+    });
   }
 
-  void spawnObject({
+  void spawnBuildModeObject({
     required String objectId,
     Vector2? position,
     bool buildMode = false
@@ -63,11 +73,28 @@ class _GameState extends State<Game> {
     var gameObject = GameObjectFactory.createInstance(
       objectId,
       position: position ?? Vector2.all(0),
-      buildMode: buildMode
+      buildMode: buildMode,
+      onPlace: (position) => addMapMetaDecoration(objectId, position)
     );
 
     // gameController.addGameComponent(component)
     gameController.addGameComponent(gameObject);
+  }
+
+  //Add game object to mapMeta and save on db
+  Future addMapMetaDecoration(String objectId, Vector2 position) async {
+    mapMeta.decorations?.add(MGameObject(
+      id: objectId,
+      position: position,
+      owner: Config.WALLET_PUBLIC
+    ));
+
+    await saveMapMeta();
+  }
+
+  //Save mapMeta to db
+  Future saveMapMeta() async {
+    await MapStore.update(mapMeta);
   }
 
   @override
@@ -88,8 +115,8 @@ class _GameState extends State<Game> {
         overlayBuilderMap: {
           "mainUi": (BuildContext context, BonfireGame game) {
             return MainUI(
-              onSpawnObject: (objectId) {
-                spawnObject(
+              onSpawnBuildObject: (objectId) {
+                spawnBuildModeObject(
                   objectId: objectId,
                   buildMode: true,
                 );

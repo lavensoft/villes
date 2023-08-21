@@ -8,9 +8,9 @@ import 'package:ville/widgets/inventory/PlayerInventory.dart';
 import 'package:ville/widgets/main.dart';
 
 class MainUI extends StatefulWidget {
-  const MainUI({ super.key, this.onSpawnObject });
+  const MainUI({ super.key, this.onSpawnBuildObject });
 
-  final Function? onSpawnObject;
+  final Function? onSpawnBuildObject;
 
   @override
   State<MainUI> createState() => _MainUIState();
@@ -52,8 +52,8 @@ class _MainUIState extends State<MainUI> {
                     inventoryVisible = false;
                   });
                 },
-                onSpawnObject: (objectId) {
-                  widget.onSpawnObject!(objectId);
+                onSpawnBuildObject: (objectId) {
+                  widget.onSpawnBuildObject!(objectId);
                 },
               ),
             ),

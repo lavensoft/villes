@@ -1,5 +1,4 @@
 import 'dart:ui';
-import "dart:math";
 import 'package:bonfire/bonfire.dart';
 import 'package:ville/config/Config.dart';
 import 'package:ville/objects/GameObject.dart';
@@ -7,7 +6,8 @@ import 'package:ville/objects/GameObject.dart';
 class Chair extends GameObject with MouseGesture {
   Chair({
     required Vector2 position,
-    this.buildMode = false
+    this.buildMode = false,
+    this.onPlace
   }) : super(
     position: position,
     imageSrc: "interiors/townInterior.png",
@@ -20,6 +20,7 @@ class Chair extends GameObject with MouseGesture {
   );
 
   bool buildMode;
+  Function(Vector2 position)? onPlace;
 
   @override
   void update(double dt) {
@@ -46,6 +47,10 @@ class Chair extends GameObject with MouseGesture {
   
   @override
   void onMouseTap(MouseButton button) {
-    buildMode = false;
+    if(buildMode) {
+      buildMode = false;
+
+      onPlace!(position);
+    }
   }
 }

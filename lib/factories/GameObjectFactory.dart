@@ -7,11 +7,13 @@ class GameObjectFactory {
   static createInstance(String objectId, {
     required Vector2 position,
     buildMode = false,
+    Function(Vector2 position)? onPlace,
   }) {
     if (_classMap.containsKey(objectId)) {
       return _classMap[objectId]!(
         position: position,
-        buildMode: buildMode
+        buildMode: buildMode,
+        onPlace: onPlace,
       ); // Call the function to create an instance
     } else {
       throw Exception("Class not found");

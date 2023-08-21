@@ -1,17 +1,16 @@
-import 'package:ville/enums/main.dart';
 import 'package:ville/models/main.dart';
 
 class MMap {
   String? id;
   String? mapSrc;
-  String? mapType;
-  List<MGameObject> decorations = [];
+  String? type;
+  List<MGameObject>? decorations;
 
   MMap({
     this.id,
     this.mapSrc,
-    this.decorations = const [],
-    this.mapType
+    this.decorations,
+    this.type
   });
 
   toMap() {
@@ -19,15 +18,15 @@ class MMap {
     return {
       "id": id,
       "mapSrc": mapSrc,
-      "type": mapType,
-      "decorations": decorations.map((e) => e.toMap()).toList()
+      "type": type,
+      "decorations": decorations?.map((e) => e.toMap()).toList()
     };
   }
 
   MMap fromMap(Map data) {
     id = data["id"];
     mapSrc = data["mapSrc"];
-    mapType = data["mapType"];
+    type = data["type"];
     
     if(data["decorations"] != null) {
       decorations = (data["decorations"] as List).map((d) => MGameObject().fromMap(d)).toList();

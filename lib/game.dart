@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:ville/api/main.dart';
 import 'package:ville/api/store/UserStore.dart';
 import 'package:ville/characters/player/UPlayer.dart';
 import 'package:ville/config/Config.dart';
 import 'package:ville/enums/EGameObject.dart';
+import 'package:ville/enums/main.dart';
 import 'package:ville/factories/main.dart';
 import 'package:ville/models/main.dart';
 import 'package:ville/objects/interiors/Chair.dart';
@@ -20,23 +22,37 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   var gameController = GameController();
-  var worldMap = WorldMapByTiled('maps/PlayerHome1.json', forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom));
+  var worldMap = WorldMapByTiled("maps/PlayerHome1.json", forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom));
 
   @override
   void initState() {
     super.initState();
 
-    authClient();
+    register();
+    loadMap();
   }
 
-  void authClient() async {
-    //Register to db
+  void register() async {
+    //Register user to db
     await UserStore.register(
       MPlayer(
         wallet: Config.WALLET_PUBLIC, 
         name: "Nhats"
       )
     );
+
+    //Register user home map
+    await MapStore.register(
+      MMap(
+        id: Config.WALLET_PUBLIC,
+        mapSrc: "maps/PlayerHome1.json",
+        mapType: EMapType.IN_DOOR
+      )
+    );
+  }
+
+  void loadMap() async {
+
   }
 
   void spawnObject({

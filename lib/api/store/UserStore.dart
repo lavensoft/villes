@@ -6,6 +6,12 @@ class UserStore {
   static FirebaseDatabase database = FirebaseDatabase.instance;
 
   static register(MPlayer player) async {
+    var resp = await database.ref("users/${player.wallet}").get();
+    
+    if(resp.value != null) {
+      return;
+    }
+
     return await database.ref("users/${player.wallet}").set(player.toMap());
   }
 

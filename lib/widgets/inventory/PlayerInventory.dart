@@ -6,10 +6,11 @@ import 'package:ville/models/player/MPlayerStats.dart';
 import 'package:ville/widgets/inventory/InventorySlot.dart';
 
 class PlayerInventory extends StatefulWidget {
-  const PlayerInventory({ super.key, required this.onClose, required this.visible });
+  const PlayerInventory({ super.key, required this.onClose, required this.visible, this.onSpawnObject });
 
   final Function onClose;
   final bool visible;
+  final Function? onSpawnObject;
 
   @override
   State<PlayerInventory> createState() => _PlayerInventoryState();
@@ -25,6 +26,7 @@ class _PlayerInventoryState extends State<PlayerInventory> {
   }
 
   void fetchTokens() async {
+    //Fetch all tokens
     final tokenResp = await Shyft.wallet.getAllTokens();
     final tokens = (tokenResp["result"] as List).map(
       (item) => MInventoryItem(
@@ -39,6 +41,8 @@ class _PlayerInventoryState extends State<PlayerInventory> {
     setState(() {
       items = tokens;
     });
+
+    //!TODO: FETCH ALLS NFT
   }
 
   void burnItem(int itemIndex, int amount) async {
@@ -98,6 +102,10 @@ class _PlayerInventoryState extends State<PlayerInventory> {
                   amount: i.amount,
                   onEat: () {
                     eatItem(index, 1);
+                  },
+                  onPlace: () {
+                    widget.onSpawnObject!(i.id);
+                    widget.onClose();
                   },
                 );
               }).toList()

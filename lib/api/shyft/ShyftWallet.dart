@@ -39,6 +39,17 @@ class ShyftWallet {
             "image": "https://nftstorage.link/ipfs/bafkreihf2jwoiubgvqlvhc4vjz5yajaitujvhls2n6zfkmmgc7tro2sfxu",
             "decimals": 0
           }
+        },
+        {
+          "address": "chair",
+          "balance": 10000,
+          "associated_account": "EVcMm8XiN4Kkveenr2tCuAAGccv73QUZ36ffM56QSaGf",
+          "info": {
+            "name": "Chair",
+            "symbol": "chair",
+            "image": "https://nftstorage.link/ipfs/bafkreihf2jwoiubgvqlvhc4vjz5yajaitujvhls2n6zfkmmgc7tro2sfxu",
+            "decimals": 0
+          }
         }
       ]
     };

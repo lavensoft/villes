@@ -1,5 +1,7 @@
 class  Config {
   static const tileZoom = 3.0;
+  static const TILE_SIZE = tileZoom * 16;
+
   static const SHYFT_API_ENABLED = false;
   static const SHYFT_KEY = "FvtQ-DsN9H3YDIYw";
   static const WALLET_PUBLIC = "7snszC4Q7uCayNX7zZE9THHpeuRE4Mj6qSjmk3ct9MPu";

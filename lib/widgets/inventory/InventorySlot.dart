@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pie_menu/pie_menu.dart';
 
 class InventorySlot extends StatelessWidget {
-  const InventorySlot({ super.key, required this.image, required this.amount, this.onEat });
+  const InventorySlot({ super.key, required this.image, required this.amount, this.onEat, this.onPlace });
 
   final Image image;
   final int amount;
   final Function? onEat;
+  final Function? onPlace;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,14 @@ class InventorySlot extends StatelessWidget {
             onSelect: () { 
               onEat!();
             } ,
-            child: Text("Ăn"),
+            child: Text("Eat"),
+          ),
+          PieAction(
+            tooltip: "",
+            onSelect: () { 
+              onPlace!();
+            } ,
+            child: Text("Place"),
           ),
         ],
         child: Column(

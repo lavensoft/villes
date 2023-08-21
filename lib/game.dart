@@ -48,6 +48,7 @@ class _GameState extends State<Game> {
 
   void loadMap() async {
     //Load meta
+    //!TODO Realtime load chỉ load lại những item thay đổi, không load lại toàn bộ map
     MapStore.onValue(Config.WALLET_PUBLIC, EMapType.IN_DOOR, (map) {
       map.decorations ??= [];
 
@@ -55,12 +56,21 @@ class _GameState extends State<Game> {
         mapMeta = map;
 
         //Load world map
-        worldMap = WorldMapByTiled(map.mapSrc!, forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom));
+        // worldMap = WorldMapByTiled(map.mapSrc!, forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom));
       });
 
       //Load object
       for (var e in mapMeta.decorations!) {
-        gameController.addGameComponent(GameObjectFactory.createInstance(e.id!, position: e.position!));
+        var gameObject = GameObjectFactory.createInstance(e.id!, position: e.position!);
+        var oldObject = gameController.visibleComponents!.where((comp) => comp.position == gameObject.position);
+
+        //Remove old component by their position
+        if(oldObject.isNotEmpty) {
+          oldObject.first.removeFromParent();
+        }
+
+        //Add new
+        gameController.addGameComponent(gameObject);
       }
     });
   }

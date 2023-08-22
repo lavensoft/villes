@@ -7,6 +7,7 @@ import 'package:ville/enums/main.dart';
 import 'package:ville/factories/main.dart';
 import 'package:ville/models/main.dart';
 import 'package:ville/objects/GameObject.dart';
+import 'package:ville/objects/sensors/TeleSensor.dart';
 import 'package:ville/ui/MainUI.dart';
 
 class Game extends StatefulWidget {
@@ -18,7 +19,13 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   var gameController = GameController();
-  var worldMap = WorldMapByTiled("maps/PlayerHome1.json", forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom));
+  var worldMap = WorldMapByTiled(
+    "maps/PlayerHome1.json", 
+    forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom),
+    objectsBuilder: {
+      "door": (TiledObjectProperties properties) => TeleSensor(properties.position)
+    }
+  );
   var mapMeta = MMap(
     id: Config.WALLET_PUBLIC,
     mapSrc: "maps/PlayerHome1.json",

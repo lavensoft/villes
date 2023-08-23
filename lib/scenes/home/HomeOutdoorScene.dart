@@ -6,64 +6,52 @@ import 'package:ville/config/Config.dart';
 import 'package:ville/enums/main.dart';
 import 'package:ville/factories/main.dart';
 import 'package:ville/models/main.dart';
-import 'package:ville/objects/GameObject.dart';
+import 'package:ville/objects/main.dart';
 import 'package:ville/objects/sensors/TeleSensor.dart';
 import 'package:ville/ui/MainUI.dart';
 
-class Game extends StatefulWidget {
-  const Game({super.key});
+class HomeOutdoorScene extends StatefulWidget {
+  const HomeOutdoorScene({super.key});
 
   @override
-  State<Game> createState() => _GameState();
+  State<HomeOutdoorScene> createState() => _HomeOutdoorSceneState();
 }
 
-class _GameState extends State<Game> {
+class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
   var gameController = GameController();
-  var worldMap = WorldMapByTiled(
-    "maps/PlayerHome1.json", 
-    forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom),
-    objectsBuilder: {
-      "door": (TiledObjectProperties properties) => TeleSensor(properties.position)
-    }
-  );
-  var mapMeta = MMap(
+  final mapSrc = "maps/PlayerHomeOutdoor1.json";
+  final mapType = EMapType.IN_DOOR;
+  late MMap mapMeta = MMap(
     id: Config.WALLET_PUBLIC,
-    mapSrc: "maps/PlayerHome1.json",
-    type: EMapType.IN_DOOR
+    mapSrc: mapSrc,
+    type: mapType
   );
+  late Vector2 playerSpawnPos;
 
   @override
   void initState() {
     super.initState();
-
-    register();
     loadMap();
+    initPlayer();
   }
 
-  void register() async {
-    //Register user to db
-    await UserStore.register(
-      MPlayer(
-        wallet: Config.WALLET_PUBLIC, 
-        name: "Nhats"
-      )
-    );
+  //* [PLAYER HANDLERS]
+  void initPlayer() async {
+    await gameController.mounted;
 
-    //Register user home map
-    await MapStore.register(mapMeta);
+    //init location
+    gameController.player?.position = playerSpawnPos;
   }
 
+  //* [MAP HANDLERS]
   void loadMap() async {
     //Load meta
     //!TODO Realtime load chỉ load lại những item thay đổi, không load lại toàn bộ map
-    MapStore.onValue(Config.WALLET_PUBLIC, EMapType.IN_DOOR, (map) {
+    MapStore.onValue(Config.WALLET_PUBLIC, mapType, (map) {
       map.decorations ??= [];
 
       setState(() {
         mapMeta = map;
-
-        //Load world map
-        // worldMap = WorldMapByTiled(map.mapSrc!, forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom));
       });
 
       //Load object
@@ -114,6 +102,11 @@ class _GameState extends State<Game> {
     await MapStore.update(mapMeta);
   }
 
+  //Map teleport
+  void mapTeleport(String mapSrc) {
+    print("TELEPORT");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -127,8 +120,25 @@ class _GameState extends State<Game> {
           mouseButtonUsedToMoveCamera: MouseButton.left,
           mouseButtonUsedToMoveToPosition: MouseButton.right,
         ),
-        map: worldMap,
-        player: UPlayer(Vector2(100, 100)),
+        map: WorldMapByTiled(
+          mapSrc, 
+          forceTileSize: Vector2(16 * Config.tileZoom, 16 * Config.tileZoom),
+          objectsBuilder: {
+            "door": (TiledObjectProperties properties) => TeleSensor(
+              position: properties.position,
+              mapSrc: properties.others["mapSrc"],
+              onTele: (e) => mapTeleport(e)
+            ),
+            "spawnPoint": (TiledObjectProperties properties) {
+              setState(() {
+                playerSpawnPos = properties.position;
+              });
+
+              return SpawnPoint(position: properties.position);
+            }
+          }
+        ),
+        player: UPlayer(Vector2.all(0)),
         overlayBuilderMap: {
           "mainUi": (BuildContext context, BonfireGame game) {
             return MainUI(

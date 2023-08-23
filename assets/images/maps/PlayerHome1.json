@@ -110,7 +110,7 @@
                          "value":"t"
                         }, 
                         {
-                         "name":"map",
+                         "name":"mapSrc",
                          "type":"string",
                          "value":"maps\/FrontHome.json"
                         }],
@@ -120,6 +120,23 @@
                  "width":19.470715835141,
                  "x":142.047722342733,
                  "y":167.323210412148
+                }, 
+                {
+                 "height":16,
+                 "id":22,
+                 "name":"spawnPoint",
+                 "properties":[
+                        {
+                         "name":"NoFurniture",
+                         "type":"string",
+                         "value":"T"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":96.0086673889491,
+                 "y":111.718309859155
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -167,7 +184,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":22,
+ "nextobjectid":23,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -202,7 +219,7 @@
         {
          "columns":32,
          "firstgid":1,
-         "image":"../interiors/townInterior.png",
+         "image":"..\/interiors\/townInterior.png",
          "imageheight":1088,
          "imagewidth":512,
          "margin":0,
@@ -366,7 +383,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
@@ -478,7 +494,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
@@ -579,7 +594,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
@@ -605,7 +619,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
@@ -656,7 +669,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
@@ -832,7 +844,7 @@
         {
          "columns":12,
          "firstgid":2177,
-         "image":"../interiors/farmhouse_tiles.png",
+         "image":"..\/interiors\/farmhouse_tiles.png",
          "imageheight":352,
          "imagewidth":192,
          "margin":0,
@@ -1007,7 +1019,7 @@
         {
          "columns":16,
          "firstgid":2441,
-         "image":"../interiors/walls_and_floors.png",
+         "image":"..\/interiors\/walls_and_floors.png",
          "imageheight":560,
          "imagewidth":256,
          "margin":0,

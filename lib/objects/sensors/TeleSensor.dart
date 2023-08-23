@@ -2,15 +2,15 @@ import 'package:bonfire/bonfire.dart';
 import 'package:ville/config/Config.dart';
 
 class TeleSensor extends GameDecoration with Sensor {
-  TeleSensor(Vector2 position) : 
+  TeleSensor({ required Vector2 position, required this.mapSrc, required this.onTele }) : 
     super.withSprite(
       sprite: Sprite.load(
-        "enviroment/spring_town.png",
+        "ui/transparent.png",
         srcPosition: Vector2.all(0),
         srcSize: Vector2.all(Config.TILE_SIZE)
       ), 
       position: position, 
-      size: Vector2.all(Config.TILE_SIZE)
+      size: Vector2.all(Config.TILE_SIZE),
     ) {
       // call this method to configure sensor area.
       setupSensorArea(
@@ -22,9 +22,20 @@ class TeleSensor extends GameDecoration with Sensor {
       );
   }
 
+  final String mapSrc;
+  final Function onTele;
+  bool actived = false;
+
   @override
   void onContact(GameComponent component) {
-      // do anything with the Component that take contact
-      print("TELE");
+    if(!actived) {
+      onTele(mapSrc);
+      actived = true;
+    }
+  }
+
+  @override
+  void onContactExit(GameComponent component) {
+    actived = false;
   }
 }

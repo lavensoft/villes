@@ -70,6 +70,9 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
     setState(() {
       itemsCollect = collects;
     });
+
+    //Burn player energy
+    StatsStore.burnEnergy(10 * amount);
   
     if(itemCollectDebounce?.isActive ?? false) itemCollectDebounce?.cancel();
 

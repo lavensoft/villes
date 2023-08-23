@@ -27,4 +27,33 @@ class ShyftToken {
 
     return;
   }
+
+  Future airdropToken(String tokenAddress, int amount) async {
+    if(Config.SHYFT_API_ENABLED) {
+      final Map<String, dynamic> data = {
+        "network": Config.WALLET_NETWORK,
+        "from_address": Config.L_WALLET_PRIV,
+        "to_address": Config.WALLET_PUBLIC,
+        "token_address": tokenAddress,
+        "amount": amount
+      };
+
+      print(data);
+
+      await http.post(
+        Uri.https("api.shyft.to", "sol/v1/token/transfer"),
+        headers: {
+          'Content-Type': 'application/json',
+          "x-api-key": Config.SHYFT_KEY
+        },
+        body: jsonEncode(data)
+      );
+
+      print("SENT");
+
+      return;
+    }
+
+    return;
+  }
 }

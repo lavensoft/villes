@@ -112,7 +112,7 @@
                         {
                          "name":"mapSrc",
                          "type":"string",
-                         "value":"maps\/FrontHome.json"
+                         "value":"maps\/PlayerHomeOutdoor1.json"
                         }],
                  "rotation":0,
                  "type":"",

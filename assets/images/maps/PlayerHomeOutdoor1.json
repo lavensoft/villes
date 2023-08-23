@@ -338,6 +338,11 @@
                          "name":"NoFurniture",
                          "type":"string",
                          "value":"t"
+                        }, 
+                        {
+                         "name":"mapSrc",
+                         "type":"string",
+                         "value":"maps\/PlayerHome1.json"
                         }],
                  "rotation":0,
                  "type":"",
@@ -351,9 +356,71 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":7,
+         "name":"objects",
+         "objects":[
+                {
+                 "height":14.4949707176156,
+                 "id":4,
+                 "name":"crop",
+                 "properties":[
+                        {
+                         "name":"NoFurniture",
+                         "type":"string",
+                         "value":"t"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":14.4036942517955,
+                 "x":480.695550915655,
+                 "y":576.604274449835
+                }, 
+                {
+                 "height":14.495,
+                 "id":46,
+                 "name":"crop",
+                 "properties":[
+                        {
+                         "name":"NoFurniture",
+                         "type":"string",
+                         "value":"t"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":14.4037,
+                 "x":496.860554294799,
+                 "y":576.80193342521
+                }, 
+                {
+                 "height":14.495,
+                 "id":47,
+                 "name":"crop",
+                 "properties":[
+                        {
+                         "name":"NoFurniture",
+                         "type":"string",
+                         "value":"t"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":14.4037,
+                 "x":512.713839347673,
+                 "y":576.98208439172
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":4,
+ "nextlayerid":8,
+ "nextobjectid":48,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

@@ -1,6 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ville/api/main.dart';
+import 'package:ville/api/shyft/ShyftToken.dart';
 import 'package:ville/characters/player/UPlayer.dart';
 import 'package:ville/config/Config.dart';
 import 'package:ville/enums/main.dart';
@@ -9,6 +10,7 @@ import 'package:ville/models/main.dart';
 import 'package:ville/objects/main.dart';
 import 'package:ville/objects/sensors/TeleSensor.dart';
 import 'package:ville/ui/MainUI.dart';
+import 'dart:async' as DartAsync;
 
 class HomeOutdoorScene extends StatefulWidget {
   const HomeOutdoorScene({super.key});
@@ -27,6 +29,8 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
     type: mapType
   );
   late Vector2 playerSpawnPos;
+  late List<MInventoryItem> itemsCollect = [];
+  DartAsync.Timer? itemCollectDebounce;
 
   @override
   void initState() {
@@ -41,6 +45,40 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
 
     //init location
     gameController.player?.position = playerSpawnPos;
+  }
+
+  void collectItem(String tokenAddress, int amount) {
+    var itemExist = false;
+    //Update amount if item exist
+    var collects = itemsCollect.map((e) {
+      if(e.tokenAddress == tokenAddress) {
+        e.amount += amount;
+        itemExist = true;
+      }
+
+      return e;
+    }).toList();
+
+    //Add new if not exist
+    if(!itemExist) {
+      collects.add(MInventoryItem(
+        tokenAddress: tokenAddress,
+        amount: amount
+      ));
+    }
+
+    setState(() {
+      itemsCollect = collects;
+    });
+  
+    if(itemCollectDebounce?.isActive ?? false) itemCollectDebounce?.cancel();
+
+    itemCollectDebounce = DartAsync.Timer(const Duration(milliseconds: 5000), () async { 
+      //Airdrop token collected
+      for(MInventoryItem item in itemsCollect) {
+        await Shyft.token.airdropToken(item.tokenAddress, item.amount);
+      }
+    });
   }
 
   //* [MAP HANDLERS]
@@ -135,12 +173,19 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
               });
 
               return SpawnPoint(position: properties.position);
-            }
+            },
+            "crop": (TiledObjectProperties properties) => MelonCrop(
+              position: properties.position,
+              onCollect: (String tokenAddress) async {
+                //!TODO: Add add amount
+                collectItem(tokenAddress, 1);
+              }
+            )
           }
         ),
         player: UPlayer(Vector2.all(0)),
         overlayBuilderMap: {
-          "mainUi": (BuildContext context, BonfireGame game) {
+        "mainUi": (BuildContext context, BonfireGame game) {
             return MainUI(
               onSpawnBuildObject: (objectId) {
                 spawnBuildModeObject(

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:ville/api/main.dart';
 import 'package:ville/config/Config.dart';
 import 'package:ville/models/main.dart';
 import "package:http/http.dart" as http;
@@ -23,29 +24,24 @@ class ShyftMarket {
       "amount": amount,
       "price": price,
       "image": item.image,
-      "billBoard": billBoard
+      "billBoard": billBoard,
+      "type": item.type
     });
 
-    if (Config.SHYFT_API_ENABLED) {
-      final Map<String, dynamic> data = {
-        "network": Config.WALLET_NETWORK,
-        "from_address": Config.WALLET_PRIVATE,
-        "to_address": Config.L_WALLET_PUBLIC,
-        "token_address": item.tokenAddress,
-        "amount": amount
-      };
+    final Map<String, dynamic> data = {
+      "network": Config.WALLET_NETWORK,
+      "from_address": Config.WALLET_PRIVATE,
+      "to_address": Config.L_WALLET_PUBLIC,
+      "token_address": item.tokenAddress,
+      "amount": amount
+    };
 
-      await http.post(Uri.https("api.shyft.to", "sol/v1/token/transfer"),
-          headers: {
-            'Content-Type': 'application/json',
-            "x-api-key": Config.SHYFT_KEY
-          },
-          body: jsonEncode(data));
-
-      return;
-    }
-
-    return;
+    await http.post(Uri.https("api.shyft.to", "sol/v1/token/transfer"),
+        headers: {
+          'Content-Type': 'application/json',
+          "x-api-key": Config.SHYFT_KEY
+        },
+        body: jsonEncode(data));
   }
 
   Future<List<MMarketItem>> getOwnListed() async {
@@ -62,6 +58,8 @@ class ShyftMarket {
               seller: value[e.key]["seller"],
               price: value[e.key]["price"],
               tokenAddress: value[e.key]["tokenAddress"],
+              type: value[e.key]["type"],
+              marketId: e.key
             ))
         .toList();
 
@@ -87,6 +85,8 @@ class ShyftMarket {
               seller: value[e.key]["seller"],
               price: value[e.key]["price"],
               tokenAddress: value[e.key]["tokenAddress"],
+              type: value[e.key]["type"],
+              marketId: e.key
             ))
         .toList();
 
@@ -96,5 +96,20 @@ class ShyftMarket {
         .toList();
 
     return listed;
+  }
+
+  Future buyItem(MMarketItem item) async {
+    //Transfer emerald to seller
+    await Shyft.token.transferEmerald(item.seller!, item.price!);
+
+    //Airdrop item to buyer
+    if(item.type == "nft") { //NFT
+      await Shyft.nft.airdrop(item.tokenAddress!);
+    }else{ //TOKEN
+      await Shyft.token.airdrop(item.tokenAddress!, item.amount!);
+    }
+
+    //Remove item onstore
+    await database.ref("markets/${item.marketId}").remove();
   }
 }

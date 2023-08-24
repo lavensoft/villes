@@ -56,7 +56,7 @@ class _PlayerInventoryState extends State<PlayerInventory> {
     });
 
     //Burn on shyft
-    await Shyft.token.burnToken(nItems[itemIndex].tokenAddress, amount);
+    await Shyft.token.burn(nItems[itemIndex].tokenAddress, amount);
   }
 
   void eatItem(int itemIndex, int amount) async {

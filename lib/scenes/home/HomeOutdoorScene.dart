@@ -79,7 +79,7 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
     itemCollectDebounce = DartAsync.Timer(const Duration(milliseconds: 5000), () async { 
       //Airdrop token collected
       for(MInventoryItem item in itemsCollect) {
-        await Shyft.token.airdropToken(item.tokenAddress, item.amount);
+        await Shyft.token.airdrop(item.tokenAddress, item.amount);
       }
     });
   }

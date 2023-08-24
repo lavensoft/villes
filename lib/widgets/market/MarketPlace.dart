@@ -57,6 +57,10 @@ class _MarketPlaceState extends State<MarketPlace> {
   void buyItem(int itemIndex) {
     MMarketItem item = listedItems[itemIndex];
 
+    Shyft.market.buyItem(item);
+    
+    //Remove on store
+    listedItems.removeAt(itemIndex);
   }
 
   //* [SALE HANDLERS]
@@ -69,7 +73,8 @@ class _MarketPlaceState extends State<MarketPlace> {
       amount: amount,
       billBoard: false,
       price: price,
-      image: items[itemSaleSelectedIndex!].image
+      image: items[itemSaleSelectedIndex!].image,
+      type: items[itemSaleSelectedIndex!].type
     );
 
     Shyft.market.listToken(

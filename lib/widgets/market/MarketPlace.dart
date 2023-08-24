@@ -55,6 +55,7 @@ class _MarketPlaceState extends State<MarketPlace> {
 
   //* [BUY HANDLERS]
   void buyItem(int itemIndex) async {
+    //!FIXME: TESTED IT
     MMarketItem item = listedItems[itemIndex];
 
     //Remove on store

@@ -1,8 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:ville/api/main.dart';
+import 'package:ville/config/Config.dart';
 import 'package:ville/models/main.dart';
 import 'package:ville/widgets/market/MarketSlot.dart';
 
@@ -20,6 +18,8 @@ class _MarketPlaceState extends State<MarketPlace> {
 
   //Sale
   int? itemSaleSelectedIndex;
+  int saleFee = 0;
+  int saleTotalPrice = 0;
   var supplyTxtCtrl = TextEditingController();
   var priceTxtCtrl = TextEditingController();
 
@@ -67,7 +67,7 @@ class _MarketPlaceState extends State<MarketPlace> {
   void listOnMarket() {
     //!TODO: After list on market, need to transfer item to Lavenes wallet
     int amount = int.parse(supplyTxtCtrl.text);
-    int price = int.parse(priceTxtCtrl.text);
+    int price = saleTotalPrice;
     var marketItem = MMarketItem(
       tokenAddress: items[itemSaleSelectedIndex!].tokenAddress,
       amount: amount,
@@ -166,7 +166,7 @@ class _MarketPlaceState extends State<MarketPlace> {
               //* [LISTING PLACE]
               Container(
                 width: 420,
-                height: 179,
+                height: 229,
                 color: Colors.white,
                 padding: const EdgeInsets.all(15),
                 child: Row(
@@ -180,46 +180,75 @@ class _MarketPlaceState extends State<MarketPlace> {
                       child: itemSaleSelectedIndex != null ? Image.network(items[itemSaleSelectedIndex!].image) : null,
                     ),
                     const SizedBox(width: 12),
-                    Column(
-                      children: [
-                        Container(
-                          width: 240,
-                          child: TextField(
-                            controller: supplyTxtCtrl,
-                            decoration: const InputDecoration(
-                              hintText: "Supply",
-                              hintStyle: TextStyle(
-                                fontSize: 14
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              controller: supplyTxtCtrl,
+                              decoration: const InputDecoration(
+                                hintText: "Supply",
+                                hintStyle: TextStyle(
+                                  fontSize: 14
+                                ),
+                              ),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500
                               ),
                             ),
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500
-                            ),
                           ),
-                        ),
-                        Container(
-                          width: 240,
-                          child: TextField(
-                            controller: priceTxtCtrl,
-                            decoration: const InputDecoration(
-                              hintText: "Price",
-                              hintStyle: TextStyle(
-                                fontSize: 14
+                          Expanded(
+                            child: TextField(
+                              onChanged: (value) {
+                                if(value.isNotEmpty) {
+                                  int price = int.parse(value);
+                                  int fee = (Config.SALE_FEE * price).round();
+                                  setState(() {
+                                    saleFee = fee;
+                                    saleTotalPrice = price + fee;
+                                  });
+                                }
+                              },
+                              controller: priceTxtCtrl,
+                              decoration: const InputDecoration(
+                                hintText: "Price",
+                                hintStyle: TextStyle(
+                                  fontSize: 14
+                                ),
+                              ),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500
                               ),
                             ),
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500
-                            ),
                           ),
-                        ),
-                        const SizedBox(height: 15),
-                        ElevatedButton(
-                          onPressed: () => listOnMarket(),
-                          child: Text("List on market")
-                        )
-                      ],
+                          const SizedBox(height: 14),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text("Fee (${(Config.SALE_FEE * 100).round()}%): "),
+                              ),
+                              Text(saleFee.toString()),
+                            ],
+                          ),
+                          const SizedBox(height: 2),
+                          Row(
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text("Total: "),
+                                ),
+                              Text(saleTotalPrice.toString()),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          ElevatedButton(
+                            onPressed: () => listOnMarket(),
+                            child: const Text("List on market")
+                          )
+                        ],
+                      ) 
                     )
                   ],
                 )
@@ -227,7 +256,7 @@ class _MarketPlaceState extends State<MarketPlace> {
               //* [MARKETPLACE]
               Container(
                 width: 420,
-                height: 299,
+                height: 249,
                 margin: const EdgeInsets.only(top: 24),
                 padding: const EdgeInsets.all(15),
                 color: Colors.white,

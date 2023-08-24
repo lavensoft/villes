@@ -59,6 +59,14 @@ class _MainUIState extends State<MainUI> {
             ),
           ),
 
+          //MARKET MODAL
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.center,
+              child: MarketPlace(),
+            ),
+          ),
+
           //====== [HUB] ======
           Positioned(
             left: 32,
@@ -83,6 +91,31 @@ class _MainUIState extends State<MainUI> {
                     path: "ui/ui.png",
                     srcPosition: Vector2(128, 410),
                     srcSize: Vector2(8, 16),
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+                    inventoryVisible = true;
+                  });
+                },
+              ),
+            ),
+          ),
+
+          //Shop button
+          Positioned(
+            bottom: 18,
+            right: 124,
+            child: Container(
+              width: 63,
+              height: 63,
+              child: ElevatedButton(
+                child: Transform.scale(
+                  scale: 2.4,
+                  child: SpriteWidget.asset(
+                    path: "ui/ui.png",
+                    srcPosition: Vector2(128, 320),
+                    srcSize: Vector2(16, 15),
                   ),
                 ),
                 onPressed: () {

@@ -26,7 +26,7 @@ class _PlayerInventoryState extends State<PlayerInventory> {
   void fetchTokens() async {
     //Fetch all tokens
     final tokenResp = await Shyft.wallet.getAllTokens();
-    final tokens = (tokenResp["result"] as List).map(
+    final tokens = tokenResp.map(
       (item) => MInventoryItem(
         id: item["info"]["symbol"],
         image: item["info"]["image"],

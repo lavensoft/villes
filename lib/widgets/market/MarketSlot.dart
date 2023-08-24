@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 class MarketSlot extends StatelessWidget {
+  const MarketSlot({ super.key, required this.imageSrc, required this.amount, this.price, this.onTap });
+
+  final String imageSrc;
+  final int amount;
+  final int? price;
+  final Function? onTap;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        
+        onTap!();
       },
       child: Container(
         width: 96,
@@ -42,7 +49,7 @@ class MarketSlot extends StatelessWidget {
                       child: Container(
                         width: 42,
                         height: 42,
-                        child: Image.network("https://stardewvalleywiki.com/mediawiki/images/1/19/Melon.png"),
+                        child: Image.network(imageSrc),
                       ),
                     ),
                   ),
@@ -57,9 +64,9 @@ class MarketSlot extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15)
                       ),
                       alignment: Alignment.center,
-                      child: const Text(
-                        "x2",
-                        style: TextStyle(
+                      child: Text(
+                        "x${amount.toString()}",
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 10,
                           fontWeight: FontWeight.w600
@@ -71,7 +78,7 @@ class MarketSlot extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 6),
-            Row(
+            price != null ? Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
@@ -80,15 +87,15 @@ class MarketSlot extends StatelessWidget {
                   // child: Image.asset("images/ui/emerald.png"),
                 ),
                 const SizedBox(width: 6),
-                const Text(
-                  "280", 
-                  style: TextStyle(
+                Text(
+                  price.toString(), 
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600
                   )
                 )
               ],
-            )
+            ) : Container(),
           ],
         ),
       ),

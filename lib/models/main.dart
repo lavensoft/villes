@@ -4,3 +4,4 @@ export "./player/MPlayerStats.dart";
 
 export "./map/MGameObject.dart";
 export "./map/MMap.dart";
+export "./MMarketItem.dart";

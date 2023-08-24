@@ -1,4 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:ville/api/main.dart';
+import 'package:ville/models/main.dart';
 import 'package:ville/widgets/market/MarketSlot.dart';
 
 class MarketPlace extends StatefulWidget {
@@ -9,6 +14,87 @@ class MarketPlace extends StatefulWidget {
 }
 
 class _MarketPlaceState extends State<MarketPlace> {
+  List<MInventoryItem> items = [];
+  List<MMarketItem> listedItems = [];
+
+  //Sale
+  int? itemSaleSelectedIndex;
+  var supplyTxtCtrl = TextEditingController();
+  var priceTxtCtrl = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    fetchInventory();
+    fetchListed();
+  }
+
+  void fetchInventory() async {
+    //Fetch all tokens
+    final tokens = await Shyft.wallet.getInventoryItems();
+
+    setState(() {
+      items = tokens;
+    });
+
+    //!TODO: FETCH ALLS NFT
+  }
+
+  //* [BUY HANDLERS]
+
+  //* [SALE HANDLERS]
+  void fetchListed() async {
+    List<MMarketItem> items = await Shyft.market.getListed();
+
+    setState(() {
+      listedItems = items;
+    });
+  }
+
+  void listOnMarket() {
+    //!TODO: After list on market, need to transfer item to Lavenes wallet
+    int amount = int.parse(supplyTxtCtrl.text);
+    int price = int.parse(priceTxtCtrl.text);
+    var marketItem = MMarketItem(
+      tokenAddress: items[itemSaleSelectedIndex!].tokenAddress,
+      amount: amount,
+      billBoard: false,
+      price: price,
+      image: items[itemSaleSelectedIndex!].image
+    );
+
+    Shyft.market.listToken(
+      item: marketItem,
+      price: price,
+      amount: amount
+    );
+    
+    priceTxtCtrl.text = "";
+    supplyTxtCtrl.text = "";
+
+    List<MInventoryItem> newItems = [];
+
+    for(int i = 0; i < items.length; i++) {
+      if(i == itemSaleSelectedIndex) {
+        items[i].amount -= amount;
+
+        if(items[i].amount > 0) {
+          newItems.add(items[i]);
+        }
+      }else{
+        newItems.add(items[i]);
+      }
+    }
+
+    listedItems.add(marketItem);
+
+    setState(() {
+      itemSaleSelectedIndex = null;
+      items = newItems;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -28,14 +114,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                 child: GridView.count(
                   crossAxisCount: 6,
                   crossAxisSpacing: 12,
-                  children: [
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot()
-                  ],
+                  children: listedItems.map((e) => MarketSlot(imageSrc: e.image!, amount: e.amount!, price: e.price)).toList(),
                 ),
               ),
               //* [MARKETPLACE]
@@ -50,18 +129,18 @@ class _MarketPlaceState extends State<MarketPlace> {
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
                   children: [
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot()
+                    // MarketSlot(),
+                    // MarketSlot(),
+                    // MarketSlot(),
+                    // MarketSlot(),
+                    // MarketSlot(),
+                    // MarketSlot(),
+                    // MarketSlot(),
+                    // MarketSlot(),
+                    // MarketSlot(),
+                    // MarketSlot(),
+                    // MarketSlot(),
+                    // MarketSlot()
                   ],
                 ),
               ),
@@ -88,6 +167,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                       width: 96,
                       height: 96,
                       color: Colors.black,
+                      child: itemSaleSelectedIndex != null ? Image.network(items[itemSaleSelectedIndex!].image) : null,
                     ),
                     const SizedBox(width: 12),
                     Column(
@@ -95,13 +175,14 @@ class _MarketPlaceState extends State<MarketPlace> {
                         Container(
                           width: 240,
                           child: TextField(
-                            decoration: InputDecoration(
+                            controller: supplyTxtCtrl,
+                            decoration: const InputDecoration(
                               hintText: "Supply",
                               hintStyle: TextStyle(
                                 fontSize: 14
                               ),
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500
                             ),
@@ -110,13 +191,14 @@ class _MarketPlaceState extends State<MarketPlace> {
                         Container(
                           width: 240,
                           child: TextField(
-                            decoration: InputDecoration(
+                            controller: priceTxtCtrl,
+                            decoration: const InputDecoration(
                               hintText: "Price",
                               hintStyle: TextStyle(
                                 fontSize: 14
                               ),
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500
                             ),
@@ -124,9 +206,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                         ),
                         const SizedBox(height: 15),
                         ElevatedButton(
-                          onPressed: () {
-
-                          },
+                          onPressed: () => listOnMarket(),
                           child: Text("List on market")
                         )
                       ],
@@ -145,20 +225,23 @@ class _MarketPlaceState extends State<MarketPlace> {
                   crossAxisCount: 4,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
-                  children: [
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot(),
-                    MarketSlot()
-                  ],
+                  children: items.asMap().entries.map((entry) {
+                    MInventoryItem i = entry.value;
+                    int index = entry.key;
+
+                    return MarketSlot(
+                      amount: i.amount,
+                      imageSrc: i.image,
+                      onTap: () {
+                        setState(() {
+                          itemSaleSelectedIndex = index;
+                        });
+
+                        supplyTxtCtrl.text = i.amount.toString();
+                        priceTxtCtrl.text = "0";
+                      },
+                    );
+                  }).toList(),
                 ),
               ),
             ],

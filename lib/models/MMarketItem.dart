@@ -7,6 +7,7 @@ class MMarketItem {
   int? price;
   String? image;
   String? type;
+  int? fee;
 
   MMarketItem({
     this.marketId,
@@ -16,7 +17,8 @@ class MMarketItem {
     this.billBoard,
     this.price,
     this.image,
-    this.type
+    this.type,
+    this.fee,
   });
 
   Map toMap() {
@@ -28,7 +30,8 @@ class MMarketItem {
       "billBoard": billBoard,
       "price": price,
       "image": image,
-      "type": type
+      "type": type,
+      "fee": fee
     };
   }
 }

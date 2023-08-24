@@ -25,7 +25,8 @@ class ShyftMarket {
       "price": price,
       "image": item.image,
       "billBoard": billBoard,
-      "type": item.type
+      "type": item.type,
+      "fee": item.fee
     });
 
     if(item.type == "nft") { //NFT
@@ -34,7 +35,7 @@ class ShyftMarket {
         "marketplace_address": Config.MARKET_ADDRESS,
         "private_key": Config.WALLET_PRIVATE,
         "nft_address": item.tokenAddress,
-        "price": amount
+        "price": price
       };
 
       await http.post(Uri.https("api.shyft.to", "sol/v0/marketplace/list"),
@@ -78,6 +79,7 @@ class ShyftMarket {
               price: value[e.key]["price"],
               tokenAddress: value[e.key]["tokenAddress"],
               type: value[e.key]["type"],
+              fee: value[e.key]["fee"],
               marketId: e.key
             ))
         .toList();
@@ -105,6 +107,7 @@ class ShyftMarket {
               price: value[e.key]["price"],
               tokenAddress: value[e.key]["tokenAddress"],
               type: value[e.key]["type"],
+              fee: value[e.key]["fee"],
               marketId: e.key
             ))
         .toList();
@@ -118,10 +121,6 @@ class ShyftMarket {
   }
 
   Future buyItem(MMarketItem item) async {
-    //Transfer emerald to seller
-    await Shyft.token.transferEmerald(item.seller!, item.price!);
-
-    //Airdrop item to buyer
     if(item.type == "nft") { //NFT Shyft Marketplace
       final Map<String, dynamic> data = {
         "network": Config.WALLET_NETWORK,
@@ -129,7 +128,7 @@ class ShyftMarket {
         "seller_address": item.seller,
         "marketplace_address": Config.MARKET_ADDRESS,
         "nft_address": item.tokenAddress,
-        "price": item.amount
+        "price": item.price! - item.fee!
       };
 
       await http.post(Uri.https("api.shyft.to", "sol/v0/marketplace/buy"),
@@ -139,7 +138,11 @@ class ShyftMarket {
         },
         body: jsonEncode(data)
       );
-    }else{ //TOKEN
+    }else{ //TOKEN Buy
+      //Transfer emerald to seller
+      await Shyft.token.transferEmerald(item.seller!, item.price!);
+
+      //Airdrop token
       await Shyft.token.airdrop(item.tokenAddress!, item.amount!);
     }
 

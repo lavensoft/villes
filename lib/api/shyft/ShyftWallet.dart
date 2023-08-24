@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'package:ville/config/Config.dart';
 import 'package:ville/models/main.dart';

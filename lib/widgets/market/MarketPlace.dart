@@ -54,13 +54,18 @@ class _MarketPlaceState extends State<MarketPlace> {
 
 
   //* [BUY HANDLERS]
-  void buyItem(int itemIndex) {
+  void buyItem(int itemIndex) async {
     MMarketItem item = listedItems[itemIndex];
 
-    Shyft.market.buyItem(item);
-    
     //Remove on store
-    listedItems.removeAt(itemIndex);
+    setState(() {
+      listedItems.removeAt(itemIndex);
+    });
+
+    await Shyft.market.buyItem(item);
+    
+    //Refresh inventory
+    fetchInventory();
   }
 
   //* [SALE HANDLERS]
@@ -74,7 +79,8 @@ class _MarketPlaceState extends State<MarketPlace> {
       billBoard: false,
       price: price,
       image: items[itemSaleSelectedIndex!].image,
-      type: items[itemSaleSelectedIndex!].type
+      type: items[itemSaleSelectedIndex!].type,
+      fee: saleFee
     );
 
     Shyft.market.listToken(

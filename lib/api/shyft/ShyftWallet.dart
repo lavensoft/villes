@@ -14,7 +14,7 @@ class ShyftWallet {
       };
 
       final http.Response response = await http.get(
-        Uri.https("api.shyft.to", "https://api.shyft.to/sol/v1/nft/read_all", data),
+        Uri.https("api.shyft.to", "sol/v1/nft/read_all", data),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           "x-api-key": Config.SHYFT_KEY

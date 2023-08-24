@@ -15,6 +15,7 @@ class MarketPlace extends StatefulWidget {
 
 class _MarketPlaceState extends State<MarketPlace> {
   List<MInventoryItem> items = [];
+  List<MMarketItem> ownListedItems = [];
   List<MMarketItem> listedItems = [];
 
   //Sale
@@ -41,17 +42,24 @@ class _MarketPlaceState extends State<MarketPlace> {
     //!TODO: FETCH ALLS NFT
   }
 
-  //* [BUY HANDLERS]
-
-  //* [SALE HANDLERS]
   void fetchListed() async {
-    List<MMarketItem> items = await Shyft.market.getListed();
+    List<MMarketItem> olItems = await Shyft.market.getOwnListed();
+    List<MMarketItem> lItems = await Shyft.market.getListed();
 
     setState(() {
-      listedItems = items;
+      ownListedItems = olItems;
+      listedItems = lItems;
     });
   }
 
+
+  //* [BUY HANDLERS]
+  void buyItem(int itemIndex) {
+    MMarketItem item = listedItems[itemIndex];
+
+  }
+
+  //* [SALE HANDLERS]
   void listOnMarket() {
     //!TODO: After list on market, need to transfer item to Lavenes wallet
     int amount = int.parse(supplyTxtCtrl.text);
@@ -87,7 +95,7 @@ class _MarketPlaceState extends State<MarketPlace> {
       }
     }
 
-    listedItems.add(marketItem);
+    ownListedItems.add(marketItem);
 
     setState(() {
       itemSaleSelectedIndex = null;
@@ -114,7 +122,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                 child: GridView.count(
                   crossAxisCount: 6,
                   crossAxisSpacing: 12,
-                  children: listedItems.map((e) => MarketSlot(imageSrc: e.image!, amount: e.amount!, price: e.price)).toList(),
+                  children: ownListedItems.map((e) => MarketSlot(imageSrc: e.image!, amount: e.amount!, price: e.price)).toList(),
                 ),
               ),
               //* [MARKETPLACE]
@@ -128,20 +136,17 @@ class _MarketPlaceState extends State<MarketPlace> {
                   crossAxisCount: 5,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
-                  children: [
-                    // MarketSlot(),
-                    // MarketSlot(),
-                    // MarketSlot(),
-                    // MarketSlot(),
-                    // MarketSlot(),
-                    // MarketSlot(),
-                    // MarketSlot(),
-                    // MarketSlot(),
-                    // MarketSlot(),
-                    // MarketSlot(),
-                    // MarketSlot(),
-                    // MarketSlot()
-                  ],
+                  children: listedItems.asMap().entries.map((entry) {
+                    MMarketItem i = entry.value;
+                    int index = entry.key;
+
+                    return MarketSlot(
+                      amount: i.amount!,
+                      imageSrc: i.image!,
+                      price: i.price!,
+                      onTap: () => buyItem(index),
+                    );
+                  }).toList(),
                 ),
               ),
             ],

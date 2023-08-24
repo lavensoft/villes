@@ -18,7 +18,8 @@ class  Config {
   static const F_WALLET_PUBLIC = "3bRB21mj2t279iYufzjmJoupUbsrCVDHgUzgWzACHrJu";
   static const F_WALLET_PRIV = "37WyvsNVM84bSGZhokb1UDAJQqtu14qnQ7aZ5YBBP9YAn7jyAGFgXqRvQCRnaD7iTQRkReC4t5eUZxWVdgkZJ8Au";
 
-  //TOKENS
+  //ADDRESS
+  static const MARKET_ADDRESS = "DBRY6z5Y3BWME1WqDuxUoJdkAiDwyV7DbzLBFfJG3ZLy";
   static const EMERALD_ADDRESS = "CBuu9NkgLepUkNgMnHeGPCEVhPxLdEU7WUyHP8MdvP2N";
 
   //STATS

@@ -28,20 +28,39 @@ class ShyftMarket {
       "type": item.type
     });
 
-    final Map<String, dynamic> data = {
-      "network": Config.WALLET_NETWORK,
-      "from_address": Config.WALLET_PRIVATE,
-      "to_address": Config.L_WALLET_PUBLIC,
-      "token_address": item.tokenAddress,
-      "amount": amount
-    };
+    if(item.type == "nft") { //NFT
+      final Map<String, dynamic> data = {
+        "network": Config.WALLET_NETWORK,
+        "marketplace_address": Config.MARKET_ADDRESS,
+        "private_key": Config.WALLET_PRIVATE,
+        "nft_address": item.tokenAddress,
+        "price": amount
+      };
 
-    await http.post(Uri.https("api.shyft.to", "sol/v1/token/transfer"),
+      await http.post(Uri.https("api.shyft.to", "sol/v0/marketplace/list"),
         headers: {
           'Content-Type': 'application/json',
           "x-api-key": Config.SHYFT_KEY
         },
-        body: jsonEncode(data));
+        body: jsonEncode(data)
+      );
+    }else{ //TOKEN
+      final Map<String, dynamic> data = {
+        "network": Config.WALLET_NETWORK,
+        "from_address": Config.WALLET_PRIVATE,
+        "to_address": Config.L_WALLET_PUBLIC,
+        "token_address": item.tokenAddress,
+        "amount": amount
+      };
+
+      await http.post(Uri.https("api.shyft.to", "sol/v1/token/transfer"),
+        headers: {
+          'Content-Type': 'application/json',
+          "x-api-key": Config.SHYFT_KEY
+        },
+        body: jsonEncode(data)
+      );
+    }
   }
 
   Future<List<MMarketItem>> getOwnListed() async {
@@ -103,8 +122,23 @@ class ShyftMarket {
     await Shyft.token.transferEmerald(item.seller!, item.price!);
 
     //Airdrop item to buyer
-    if(item.type == "nft") { //NFT
-      await Shyft.nft.airdrop(item.tokenAddress!);
+    if(item.type == "nft") { //NFT Shyft Marketplace
+      final Map<String, dynamic> data = {
+        "network": Config.WALLET_NETWORK,
+        "private_key": Config.WALLET_PRIVATE,
+        "seller_address": item.seller,
+        "marketplace_address": Config.MARKET_ADDRESS,
+        "nft_address": item.tokenAddress,
+        "price": item.amount
+      };
+
+      await http.post(Uri.https("api.shyft.to", "sol/v0/marketplace/buy"),
+        headers: {
+          'Content-Type': 'application/json',
+          "x-api-key": Config.SHYFT_KEY
+        },
+        body: jsonEncode(data)
+      );
     }else{ //TOKEN
       await Shyft.token.airdrop(item.tokenAddress!, item.amount!);
     }

@@ -1,16 +1,19 @@
-# ville
+# Ville City
 
-A new Flutter project.
+## Core Features:
+Economic System:
+- Marketplace:
+   - [x] Build Token Marketplace.
+      - [x] Transfer seller token to Lavenes Wallet.
+      - [x] Transfer buyer fee to Lavenes.
+      - [x] Transfer token to buyer.
+   - [x] List NFT to Shyft Marketplace.
+      -  [x] Create Shyft marketplace (DBRY6z5Y3BWME1WqDuxUoJdkAiDwyV7DbzLBFfJG3ZLy).
+   - [x] List Token to Marketplace.
+   - [x] Fee transaction ( NFT & Token ).
+   - [x] Buying system.
+- [ ] Banking - Stake coin ( Emerald )
 
-## Getting Started
+Dynamic Content:
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Gameplay:

@@ -4,6 +4,7 @@ import 'package:pie_menu/pie_menu.dart';
 import 'package:ville/api/store/UserStore.dart';
 import 'package:ville/config/Config.dart';
 import 'package:ville/models/main.dart';
+import 'package:ville/widgets/artist/ArtContentCreate.dart';
 import 'package:ville/widgets/inventory/PlayerInventory.dart';
 import 'package:ville/widgets/main.dart';
 
@@ -17,9 +18,10 @@ class MainUI extends StatefulWidget {
 }
 
 class _MainUIState extends State<MainUI> {
-  bool inventoryVisible = false;
   MPlayer player = MPlayer();
+  bool inventoryVisible = false;
   bool marketVisible = false;
+  bool artCreateVisible = false;
 
   @override
   void initState() {
@@ -73,6 +75,19 @@ class _MainUIState extends State<MainUI> {
                 },
               ),
             ),
+          ),
+
+          //NFT CREATE MODAL
+          Positioned.fill(
+            child:Align(
+              child: artCreateVisible ? ArtContentCreate(
+                onClose: () {
+                  setState(() {
+                    artCreateVisible = false;
+                  });
+                },
+              ) : null,
+            )
           ),
 
           //====== [HUB] ======
@@ -129,6 +144,31 @@ class _MainUIState extends State<MainUI> {
                 onPressed: () {
                   setState(() {
                     marketVisible = true;
+                  });
+                },
+              ),
+            ),
+          ),
+
+          //Art create button
+          Positioned(
+            bottom: 90,
+            right: 105,
+            child: Container(
+              width: 63,
+              height: 63,
+              child: ElevatedButton(
+                child: Transform.scale(
+                  scale: 2.4,
+                  child: SpriteWidget.asset(
+                    path: "ui/ui.png",
+                    srcPosition: Vector2(128, 320),
+                    srcSize: Vector2(16, 15),
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+                    artCreateVisible = true;
                   });
                 },
               ),

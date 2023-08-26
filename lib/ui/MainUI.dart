@@ -48,8 +48,7 @@ class _MainUIState extends State<MainUI> {
           Positioned.fill(
             child: Align(
               alignment: Alignment.center,
-              child: PlayerInventory(
-                visible: inventoryVisible,
+              child: inventoryVisible ? PlayerInventory(
                 onClose: () {
                   setState(() {
                     inventoryVisible = false;
@@ -58,7 +57,7 @@ class _MainUIState extends State<MainUI> {
                 onSpawnBuildObject: (objectId) {
                   widget.onSpawnBuildObject!(objectId);
                 },
-              ),
+              ) : null,
             ),
           ),
 
@@ -66,14 +65,13 @@ class _MainUIState extends State<MainUI> {
           Positioned.fill(
             child: Align(
               alignment: Alignment.center,
-              child: MarketPlace(
-                visible: marketVisible,
+              child: marketVisible ? MarketPlace(
                 onClose: () {
                   setState(() {
                     marketVisible = false;
                   });
                 },
-              ),
+              ) : null,
             ),
           ),
 
@@ -90,7 +88,7 @@ class _MainUIState extends State<MainUI> {
             )
           ),
 
-          //====== [HUB] ======
+          //====== [HUD] ======
           Positioned(
             left: 32,
             bottom: 106,

@@ -4,10 +4,9 @@ import 'package:ville/models/MInventoryItem.dart';
 import 'package:ville/widgets/inventory/InventorySlot.dart';
 
 class PlayerInventory extends StatefulWidget {
-  const PlayerInventory({ super.key, required this.onClose, required this.visible, this.onSpawnBuildObject });
+  const PlayerInventory({ super.key, required this.onClose, this.onSpawnBuildObject });
 
   final Function onClose;
-  final bool visible;
   final Function? onSpawnBuildObject;
 
   @override
@@ -20,21 +19,12 @@ class _PlayerInventoryState extends State<PlayerInventory> {
   @override
   void initState() {
     super.initState();
-    fetchTokens();
+    fetchInventory();
   }
 
-  void fetchTokens() async {
+  void fetchInventory() async {
     //Fetch all tokens
-    final tokenResp = await Shyft.wallet.getAllTokens();
-    final tokens = tokenResp.map(
-      (item) => MInventoryItem(
-        id: item["info"]["symbol"],
-        image: item["info"]["image"],
-        amount: item["balance"],
-        name: item["info"]["name"],
-        tokenAddress: item["address"],
-      )
-    ).toList();
+    final tokens = await Shyft.wallet.getInventoryItems();
 
     setState(() {
       items = tokens;
@@ -67,8 +57,6 @@ class _PlayerInventoryState extends State<PlayerInventory> {
 
   @override
   Widget build(BuildContext context) {
-    if(!widget.visible) return Container();
-    
     return Container(
       width: 600,
       height: 420,

@@ -8,6 +8,7 @@ class MarketSlot extends StatelessWidget {
   final int? price;
   final Function? onTap;
 
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

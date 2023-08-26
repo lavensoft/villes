@@ -5,10 +5,9 @@ import 'package:ville/models/main.dart';
 import 'package:ville/widgets/market/MarketSlot.dart';
 
 class MarketPlace extends StatefulWidget {
-  const MarketPlace({ super.key, required this.onClose, required this.visible });
+  const MarketPlace({ super.key, required this.onClose });
 
   final Function onClose;
-  final bool visible;
 
   @override
   State<MarketPlace> createState() => _MarketPlaceState();
@@ -120,8 +119,6 @@ class _MarketPlaceState extends State<MarketPlace> {
 
   @override
   Widget build(BuildContext context) {
-    if(!widget.visible) return Container();
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

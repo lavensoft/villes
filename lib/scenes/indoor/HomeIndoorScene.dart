@@ -116,10 +116,14 @@ class _HomeIndoorSceneState extends State<HomeIndoorScene> {
         showCollisionArea: true,
         cameraConfig: CameraConfig(
             zoom: 1, smoothCameraEnabled: true, moveOnlyMapArea: true),
-        joystick: JoystickMoveToPosition(
-          enabledMoveCameraWithClick: true,
-          mouseButtonUsedToMoveCamera: MouseButton.left,
-          mouseButtonUsedToMoveToPosition: MouseButton.right,
+        joystick: Joystick(
+            keyboardConfig: KeyboardConfig(
+            enable: true, // Use to enable ou disable keyboard events (default is true)
+            // acceptedKeys: [ // You can pass specific Keys accepted. If null accept all keys
+            //   LogicalKeyboardKey.space,
+            // ],
+            keyboardDirectionalType: KeyboardDirectionalType.arrows, // Type of the directional (arrows or wasd)
+          ), // Here you enable receive keyboard interaction
         ),
         map: WorldMapByTiled(
           mapSrc, 

@@ -5,7 +5,10 @@ import 'package:ville/models/main.dart';
 import 'package:ville/widgets/market/MarketSlot.dart';
 
 class MarketPlace extends StatefulWidget {
-  const MarketPlace({ super.key });
+  const MarketPlace({ super.key, required this.onClose, required this.visible });
+
+  final Function onClose;
+  final bool visible;
 
   @override
   State<MarketPlace> createState() => _MarketPlaceState();
@@ -117,6 +120,8 @@ class _MarketPlaceState extends State<MarketPlace> {
 
   @override
   Widget build(BuildContext context) {
+    if(!widget.visible) return Container();
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -253,6 +258,10 @@ class _MarketPlaceState extends State<MarketPlace> {
                           ElevatedButton(
                             onPressed: () => listOnMarket(),
                             child: const Text("List on market")
+                          ),
+                          ElevatedButton(
+                            onPressed: () => widget.onClose(),
+                            child: const Text("Close")
                           )
                         ],
                       ) 

@@ -19,6 +19,7 @@ class MainUI extends StatefulWidget {
 class _MainUIState extends State<MainUI> {
   bool inventoryVisible = false;
   MPlayer player = MPlayer();
+  bool marketVisible = false;
 
   @override
   void initState() {
@@ -63,7 +64,14 @@ class _MainUIState extends State<MainUI> {
           Positioned.fill(
             child: Align(
               alignment: Alignment.center,
-              child: MarketPlace(),
+              child: MarketPlace(
+                visible: marketVisible,
+                onClose: () {
+                  setState(() {
+                    marketVisible = false;
+                  });
+                },
+              ),
             ),
           ),
 
@@ -120,7 +128,7 @@ class _MainUIState extends State<MainUI> {
                 ),
                 onPressed: () {
                   setState(() {
-                    inventoryVisible = true;
+                    marketVisible = true;
                   });
                 },
               ),

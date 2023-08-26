@@ -9,6 +9,7 @@ import 'package:ville/factories/main.dart';
 import 'package:ville/models/main.dart';
 import 'package:ville/objects/main.dart';
 import 'package:ville/objects/sensors/TeleSensor.dart';
+import 'package:ville/scenes/indoor/HomeIndoorScene.dart';
 import 'package:ville/ui/MainUI.dart';
 import 'dart:async' as DartAsync;
 
@@ -145,7 +146,7 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
 
   //Map teleport
   void mapTeleport(String mapSrc) {
-    print("TELEPORT");
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const HomeIndoorScene()));
   }
 
   @override

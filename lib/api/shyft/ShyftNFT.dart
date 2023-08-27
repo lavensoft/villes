@@ -41,7 +41,10 @@ class ShyftNFT {
     request.fields["royalty"] = "0";
     request.fields["network"] = Config.WALLET_NETWORK;
     request.fields["receiver"] = Config.WALLET_PUBLIC;
-    request.fields["attributes"] = "[  {    \"width\": \"$width\",    \"height\": \"$height\"  }]";
+    request.fields["attributes"] = jsonEncode([
+      { "trait_type":"width", "value": width },
+      { "trait_type":"height", "value": height }
+    ]);
     request.fields["symbol"] = symbol;
     request.fields["description"] = desc;
     request.fields["service_charge"] = "{  \"receiver\": \"${Config.WALLET_PUBLIC}\",  \"amount\": 0.01}";
@@ -56,6 +59,7 @@ class ShyftNFT {
     request.headers["x-api-key"] = Config.SHYFT_KEY;
     request.headers["Content-Type"] = "multipart/form-data";
 
+    // print(request.fields);
     await request.send();
   }
 }

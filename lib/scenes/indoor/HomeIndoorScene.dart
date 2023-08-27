@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ville/api/main.dart';
@@ -71,17 +73,38 @@ class _HomeIndoorSceneState extends State<HomeIndoorScene> {
     });
   }
 
+  Future<dynamic> getImage(String path) async {
+    Completer<ImageInfo> completer = Completer();
+    var img = NetworkImage(path);
+    img.resolve(const ImageConfiguration()).addListener(ImageStreamListener((ImageInfo info,bool _){
+      completer.complete(info);
+    }));
+    ImageInfo imageInfo = await completer.future;
+    return imageInfo.image;
+  }
+
   void spawnBuildModeObject({
-    required String objectId,
+    required MInventoryItem item,
     Vector2? position,
     bool buildMode = false
-  }) {
-    var gameObject = GameObjectFactory.createInstance(
-      objectId,
+  }) async {
+
+    var gameObject = DynamicObject(
       position: position ?? Vector2.all(0),
       buildMode: buildMode,
-      onPlace: (position) => addMapMetaDecoration(objectId, position)
+      spriteImage: await getImage(item.spriteSrc!) , 
+      spriteSize: item.spriteSize!, 
+      objectId: item.id,
+      onPlace: (position) {}
     );
+
+
+    // var gameObject = GameObjectFactory.createInstance(
+    //   objectId,
+    //   position: position ?? Vector2.all(0),
+    //   buildMode: buildMode,
+    //   onPlace: (position) => addMapMetaDecoration(objectId, position)
+    // );
 
     // gameController.addGameComponent(component)
     gameController.addGameComponent(gameObject);
@@ -147,9 +170,9 @@ class _HomeIndoorSceneState extends State<HomeIndoorScene> {
         overlayBuilderMap: {
           "mainUi": (BuildContext context, BonfireGame game) {
             return MainUI(
-              onSpawnBuildObject: (objectId) {
+              onSpawnBuildObject: (item) {
                 spawnBuildModeObject(
-                  objectId: objectId,
+                  item: item,
                   buildMode: true,
                 );
               },

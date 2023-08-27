@@ -54,8 +54,8 @@ class _MainUIState extends State<MainUI> {
                     inventoryVisible = false;
                   });
                 },
-                onSpawnBuildObject: (objectId) {
-                  widget.onSpawnBuildObject!(objectId);
+                onSpawnBuildObject: (item) {
+                  widget.onSpawnBuildObject!(item);
                 },
               ) : null,
             ),

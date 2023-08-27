@@ -1,3 +1,5 @@
+import 'package:bonfire/bonfire.dart';
+
 class MInventoryItem {
   late String id;
   late String image;
@@ -5,6 +7,8 @@ class MInventoryItem {
   late String name;
   late String tokenAddress;
   String? type;
+  String? spriteSrc;
+  Vector2? spriteSize;
 
   MInventoryItem({ 
     this.id = "", 
@@ -12,7 +16,9 @@ class MInventoryItem {
     this.amount = 0, 
     this.name = "", 
     this.tokenAddress = "",
-    this.type
+    this.type,
+    this.spriteSrc,
+    this.spriteSize
   });
 
   Map toMap() {
@@ -22,7 +28,9 @@ class MInventoryItem {
       "amount": amount,
       "name": name,
       "tokenAddress": tokenAddress,
-      "type": type
+      "type": type,
+      "spriteSrc": spriteSrc,
+      "spriteSize": spriteSize
     };
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bonfire/bonfire.dart';
 import 'package:http/http.dart' as http;
 import 'package:ville/config/Config.dart';
 import 'package:ville/models/main.dart';
@@ -178,6 +179,12 @@ class ShyftWallet {
     }
 
     for (var element in nfts) {
+      Vector2? spriteSize;
+
+      if(element["attributes"]?["width"] != null) {
+        spriteSize = Vector2((element["attributes"]?["width"] as int).toDouble(), (element["attributes"]?["height"] as int).toDouble());
+      }
+
       items.add(
         MInventoryItem(
           id: element["mint"],
@@ -185,7 +192,9 @@ class ShyftWallet {
           amount: 1,
           name: element["name"],
           tokenAddress: element["mint"],
-          type: "nft"
+          type: "nft",
+          spriteSize: spriteSize,
+          spriteSrc: element["files"]?[1]?["uri"]
         )
       );
     }

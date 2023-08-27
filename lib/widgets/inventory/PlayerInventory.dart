@@ -90,7 +90,7 @@ class _PlayerInventoryState extends State<PlayerInventory> {
                     eatItem(index, 1);
                   },
                   onPlace: () {
-                    widget.onSpawnBuildObject!(i.id);
+                    widget.onSpawnBuildObject!(i);
                     widget.onClose();
                   },
                 );

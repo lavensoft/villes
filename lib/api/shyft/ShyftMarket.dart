@@ -29,7 +29,7 @@ class ShyftMarket {
       "fee": item.fee
     });
 
-    if(item.type == "nft") { //NFT
+    if(item.type == "nfts") { //NFT //!TODO: MARKET
       final Map<String, dynamic> data = {
         "network": Config.WALLET_NETWORK,
         "marketplace_address": Config.MARKET_ADDRESS,
@@ -141,6 +141,8 @@ class ShyftMarket {
     }else{ //TOKEN Buy
       //Transfer emerald to seller
       await Shyft.token.transferEmerald(item.seller!, item.price!);
+
+      print("DONE");
 
       //Airdrop token
       await Shyft.token.airdrop(item.tokenAddress!, item.amount!);

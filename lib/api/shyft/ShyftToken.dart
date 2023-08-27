@@ -31,6 +31,8 @@ class ShyftToken {
       "amount": amount
     };
 
+    print(data);
+
     await http.post(
       Uri.https("api.shyft.to", "sol/v1/token/transfer"),
       headers: {

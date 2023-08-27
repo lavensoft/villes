@@ -17,6 +17,8 @@ class StatsStore {
     
     if(playerStats.energy < 0) playerStats.energy = 0;
 
+    Map stats = playerStats.toMap();
+
     await database.ref("users/${Config.WALLET_PUBLIC}").update({
       "stats": playerStats.toMap()
     });

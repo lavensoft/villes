@@ -32,6 +32,7 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
   late Vector2 playerSpawnPos;
   late List<MInventoryItem> itemsCollect = [];
   DartAsync.Timer? itemCollectDebounce;
+  MPlayer player = MPlayer();
 
   @override
   void initState() {
@@ -46,6 +47,13 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
 
     //init location
     gameController.player?.position = playerSpawnPos;
+
+    //Listen data
+    UserStore.onValue(Config.WALLET_PUBLIC, (p) {
+      setState(() {
+          player = p;
+        });
+    });
   }
 
   void collectItem(String tokenAddress, int amount) {
@@ -78,10 +86,11 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
     if(itemCollectDebounce?.isActive ?? false) itemCollectDebounce?.cancel();
 
     itemCollectDebounce = DartAsync.Timer(const Duration(milliseconds: 5000), () async { 
-      //Airdrop token collected
-      for(MInventoryItem item in itemsCollect) {
-        await Shyft.token.airdrop(item.tokenAddress, item.amount);
-      }
+      print("COLLECT ITEMS");
+      // //Airdrop token collected
+      // for(MInventoryItem item in itemsCollect) {
+      //   await Shyft.token.airdrop(item.tokenAddress, item.amount);
+      // }
     });
   }
 
@@ -195,6 +204,7 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
         overlayBuilderMap: {
         "mainUi": (BuildContext context, BonfireGame game) {
             return MainUI(
+              player: player,
               onSpawnBuildObject: (objectId) {
                 spawnBuildModeObject(
                   objectId: objectId,

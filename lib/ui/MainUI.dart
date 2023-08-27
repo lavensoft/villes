@@ -9,16 +9,16 @@ import 'package:ville/widgets/inventory/PlayerInventory.dart';
 import 'package:ville/widgets/main.dart';
 
 class MainUI extends StatefulWidget {
-  const MainUI({ super.key, this.onSpawnBuildObject });
+  const MainUI({ super.key, this.onSpawnBuildObject, this.player });
 
   final Function? onSpawnBuildObject;
+  final MPlayer? player;
 
   @override
   State<MainUI> createState() => _MainUIState();
 }
 
 class _MainUIState extends State<MainUI> {
-  MPlayer player = MPlayer();
   bool inventoryVisible = false;
   bool marketVisible = false;
   bool artCreateVisible = false;
@@ -26,16 +26,6 @@ class _MainUIState extends State<MainUI> {
   @override
   void initState() {
     super.initState();
-
-    fetchPlayer();
-  }
-
-  void fetchPlayer() async {
-    UserStore.onValue(Config.WALLET_PUBLIC, (p) {
-      setState(() {
-        player = p;
-      });
-    });
   }
 
   @override
@@ -93,7 +83,7 @@ class _MainUIState extends State<MainUI> {
             left: 32,
             bottom: 106,
             child: EnergyBar(
-              value: player.stats?.energy ?? 0
+              value: widget.player?.stats?.energy ?? 0
             ),
           ),
 

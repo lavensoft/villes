@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:ville/config/Config.dart';
 import 'package:ville/models/main.dart';
@@ -5,6 +7,7 @@ import 'package:ville/models/player/MPlayerStats.dart';
 
 class UserStore {
   static FirebaseDatabase database = FirebaseDatabase.instance;
+  static StreamSubscription<DatabaseEvent>? onValueSub;
 
   static Future register(MPlayer player) async {
     var resp = await database.ref("users/${player.wallet}").get();
@@ -17,11 +20,15 @@ class UserStore {
   }
 
   static onValue(String wallet, Function(MPlayer) onData) {
-    database.ref("users/$wallet").onValue.listen((event) {
+    onValueSub = database.ref("users/$wallet").onValue.listen((event) {
       final data = event.snapshot.value;
       if(data != null) {
         onData(MPlayer().fromMap((data as Map)));
       }
     }); 
+  }
+
+  static cancelOnValue() async {
+    await onValueSub!.cancel();
   }
 }

@@ -25,6 +25,7 @@ class _HomeIndoorSceneState extends State<HomeIndoorScene> {
   final mapSrc = "maps/PlayerHome1.json";
   final mapType = EMapType.IN_DOOR;
   late Vector2 playerSpawnPos;
+  MPlayer player = MPlayer();
   late MMap mapMeta = MMap(
     id: Config.WALLET_PUBLIC,
     mapSrc: mapSrc,
@@ -44,6 +45,13 @@ class _HomeIndoorSceneState extends State<HomeIndoorScene> {
 
     //init location
     gameController.player?.position = playerSpawnPos;
+
+    //Listen data
+    UserStore.onValue(Config.WALLET_PUBLIC, (p) {
+      setState(() {
+          player = p;
+        });
+    });
   }
 
   //* [MAP HANDLERS]
@@ -170,6 +178,7 @@ class _HomeIndoorSceneState extends State<HomeIndoorScene> {
         overlayBuilderMap: {
           "mainUi": (BuildContext context, BonfireGame game) {
             return MainUI(
+              player: player,
               onSpawnBuildObject: (item) {
                 spawnBuildModeObject(
                   item: item,

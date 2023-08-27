@@ -150,7 +150,7 @@ class _BarnIndoorSceneState extends State<BarnIndoorScene> {
             zoom: 1, smoothCameraEnabled: true, moveOnlyMapArea: true),
         joystick: Joystick(
             keyboardConfig: KeyboardConfig(
-            enable: false, // 
+            enable: false,
             // acceptedKeys: [ // You can pass specific Keys accepted. If null accept all keys
             //   LogicalKeyboardKey.space,
             // ],

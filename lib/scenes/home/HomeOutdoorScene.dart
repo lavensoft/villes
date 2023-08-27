@@ -168,7 +168,7 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
     return Material(
       child: BonfireWidget(
         gameController: gameController,
-        showCollisionArea: true,
+        showCollisionArea: false,
         cameraConfig: CameraConfig(
             zoom: 1, smoothCameraEnabled: true, moveOnlyMapArea: true),
         joystick: Joystick(

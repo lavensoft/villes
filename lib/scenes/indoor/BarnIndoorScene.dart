@@ -145,12 +145,12 @@ class _BarnIndoorSceneState extends State<BarnIndoorScene> {
     return Material(
       child: BonfireWidget(
         gameController: gameController,
-        showCollisionArea: true,
+        showCollisionArea: false,
         cameraConfig: CameraConfig(
             zoom: 1, smoothCameraEnabled: true, moveOnlyMapArea: true),
         joystick: Joystick(
             keyboardConfig: KeyboardConfig(
-            enable: true, // Use to enable ou disable keyboard events (default is true)
+            enable: false, // 
             // acceptedKeys: [ // You can pass specific Keys accepted. If null accept all keys
             //   LogicalKeyboardKey.space,
             // ],

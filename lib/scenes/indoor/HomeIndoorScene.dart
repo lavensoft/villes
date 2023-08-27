@@ -47,11 +47,11 @@ class _HomeIndoorSceneState extends State<HomeIndoorScene> {
     gameController.player?.position = playerSpawnPos;
 
     //Listen data
-    UserStore.onValue(Config.WALLET_PUBLIC, (p) {
-      setState(() {
-          player = p;
-        });
-    });
+    // UserStore.onValue(Config.WALLET_PUBLIC, (p) {
+    //   setState(() {
+    //       player = p;
+    //     });
+    // });
   }
 
   //* [MAP HANDLERS]
@@ -144,7 +144,7 @@ class _HomeIndoorSceneState extends State<HomeIndoorScene> {
     return Material(
       child: BonfireWidget(
         gameController: gameController,
-        showCollisionArea: true,
+        showCollisionArea: false,
         cameraConfig: CameraConfig(
             zoom: 1, smoothCameraEnabled: true, moveOnlyMapArea: true),
         joystick: Joystick(

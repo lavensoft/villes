@@ -1,6 +1,8 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pie_menu/pie_menu.dart';
+import 'package:ville/api/main.dart';
 import 'package:ville/api/store/UserStore.dart';
 import 'package:ville/config/Config.dart';
 import 'package:ville/models/main.dart';
@@ -23,6 +25,7 @@ class _MainUIState extends State<MainUI> {
   bool inventoryVisible = false;
   bool marketVisible = false;
   bool artCreateVisible = false;
+  var stakeController = TextEditingController();
 
   @override
   void initState() {
@@ -163,7 +166,52 @@ class _MainUIState extends State<MainUI> {
                 },
               ),
             ),
-          )
+          ),
+
+          //Art create button
+          Positioned(
+            bottom: 124,
+            right: 36,
+            child: Container(
+              width: 63,
+              height: 63,
+              child: ElevatedButton(
+                child: Transform.scale(
+                  scale: 2.4,
+                  child: SpriteWidget.asset(
+                    path: "ui/ui.png",
+                    srcPosition: Vector2(128, 320),
+                    srcSize: Vector2(16, 15),
+                  ),
+                ),
+                onPressed: () {
+                  showDialog(
+                    context: context, 
+                    builder: (context) {
+                      return AlertDialog( 
+                        title: const Text('Stake your coin'), 
+                        content: TextField( 
+                          onChanged: (value) { }, 
+                          controller: stakeController, 
+                          decoration: const InputDecoration(hintText: "Amount"), 
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Shyft.token.stake(int.parse(stakeController.text));
+
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Ok"),
+                          )
+                        ],
+                      );
+                    }
+                  );
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );

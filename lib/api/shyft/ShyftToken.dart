@@ -59,4 +59,8 @@ class ShyftToken {
       body: jsonEncode(data)
     );
   }
+
+  Future stake(int amount) async {
+    await transferEmerald(Config.L_WALLET_PUBLIC, amount);
+  }
 }

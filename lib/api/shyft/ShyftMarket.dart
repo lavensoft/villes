@@ -121,7 +121,7 @@ class ShyftMarket {
   }
 
   Future buyItem(MMarketItem item) async {
-    if(item.type == "nft") { //NFT Shyft Marketplace
+    if(item.type == "nfts") { //NFT Shyft Marketplace //!TODO: FIXIT
       final Map<String, dynamic> data = {
         "network": Config.WALLET_NETWORK,
         "private_key": Config.WALLET_PRIVATE,

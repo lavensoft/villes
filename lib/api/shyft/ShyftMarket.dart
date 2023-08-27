@@ -147,6 +147,6 @@ class ShyftMarket {
     }
 
     //Remove item onstore
-    await database.ref("markets/${item.marketId}").remove();
+    // await database.ref("markets/${item.marketId}").remove();
   }
 }

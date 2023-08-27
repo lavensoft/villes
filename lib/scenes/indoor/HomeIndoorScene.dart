@@ -178,6 +178,7 @@ class _HomeIndoorSceneState extends State<HomeIndoorScene> {
         overlayBuilderMap: {
           "mainUi": (BuildContext context, BonfireGame game) {
             return MainUI(
+              onNFTCreate: () => StatsStore.burnEnergy(50),
               player: player,
               onSpawnBuildObject: (item) {
                 spawnBuildModeObject(

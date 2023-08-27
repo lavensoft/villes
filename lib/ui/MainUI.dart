@@ -9,10 +9,11 @@ import 'package:ville/widgets/inventory/PlayerInventory.dart';
 import 'package:ville/widgets/main.dart';
 
 class MainUI extends StatefulWidget {
-  const MainUI({ super.key, this.onSpawnBuildObject, this.player });
+  const MainUI({ super.key, this.onSpawnBuildObject, this.player, this.onNFTCreate });
 
   final Function? onSpawnBuildObject;
   final MPlayer? player;
+  final Function? onNFTCreate;
 
   @override
   State<MainUI> createState() => _MainUIState();
@@ -69,6 +70,7 @@ class _MainUIState extends State<MainUI> {
           Positioned.fill(
             child:Align(
               child: artCreateVisible ? ArtContentCreate(
+                onCreate: () => widget.onNFTCreate!(),
                 onClose: () {
                   setState(() {
                     artCreateVisible = false;

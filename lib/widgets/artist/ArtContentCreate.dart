@@ -5,9 +5,10 @@ import 'package:ville/api/main.dart';
 import 'package:ville/api/shyft/ShyftNFT.dart';
 
 class ArtContentCreate extends StatefulWidget {
-  const ArtContentCreate({ super.key, required this.onClose });
+  const ArtContentCreate({ super.key, required this.onClose, this.onCreate });
 
   final Function onClose;
+  final Function? onCreate;
 
   @override
   State<ArtContentCreate> createState() => _ArtContentCreateState();
@@ -60,6 +61,8 @@ class _ArtContentCreateState extends State<ArtContentCreate> {
       thumbSrc = null;
       spriteSrc = null;
     });
+  
+    widget.onCreate!();
   }
 
   @override

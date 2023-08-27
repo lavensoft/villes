@@ -5,7 +5,7 @@ import 'package:bonfire/bonfire.dart';
 class UPlayerSpriteSheet {
   static double runStepTime = .24;
   static double idleStepTime = .24;
-  static String spriteImage = "player/player.png";
+  static String spriteImage = "player/player2.png";
 
   static Future<SpriteAnimation> get idleUp => SpriteAnimation.load(
         UPlayerSpriteSheet.spriteImage,
@@ -13,7 +13,7 @@ class UPlayerSpriteSheet {
             amount: 1,
             stepTime: UPlayerSpriteSheet.idleStepTime,
             textureSize: Vector2(16, 32),
-            texturePosition: Vector2(0, 96)),
+            texturePosition: Vector2(0, 64)),
       );
 
 
@@ -40,16 +40,16 @@ class UPlayerSpriteSheet {
             amount: 1,
             stepTime: UPlayerSpriteSheet.idleStepTime,
             textureSize: Vector2(16, 32),
-            texturePosition: Vector2(0, 32)),
+            texturePosition: Vector2(0, 96)),
       );
 
   static Future<SpriteAnimation> get runUp => SpriteAnimation.load(
         UPlayerSpriteSheet.spriteImage,
         SpriteAnimationData.sequenced(
-          amount: 2,
+          amount: 4,
           stepTime: UPlayerSpriteSheet.runStepTime,
           textureSize: Vector2(16, 32),
-          texturePosition: Vector2(16, 64),
+          texturePosition: Vector2(0, 64),
         ),
       );
 
@@ -57,10 +57,10 @@ class UPlayerSpriteSheet {
   static Future<SpriteAnimation> get runDown => SpriteAnimation.load(
         UPlayerSpriteSheet.spriteImage,
         SpriteAnimationData.sequenced(
-          amount: 2,
+          amount: 4,
           stepTime: UPlayerSpriteSheet.runStepTime,
           textureSize: Vector2(16, 32),
-          texturePosition: Vector2(16, 0),
+          texturePosition: Vector2(0, 0),
         ),
       );
 
@@ -68,20 +68,20 @@ class UPlayerSpriteSheet {
   static Future<SpriteAnimation> get runRight => SpriteAnimation.load(
         UPlayerSpriteSheet.spriteImage,
         SpriteAnimationData.sequenced(
-          amount: 2,
+          amount: 4,
           stepTime: UPlayerSpriteSheet.runStepTime,
           textureSize: Vector2(16, 32),
-          texturePosition: Vector2(16, 32),
+          texturePosition: Vector2(0, 32),
         ),
       );
 
   static Future<SpriteAnimation> get runLeft => SpriteAnimation.load(
         UPlayerSpriteSheet.spriteImage,
         SpriteAnimationData.sequenced(
-          amount: 2,
+          amount: 4,
           stepTime: UPlayerSpriteSheet.runStepTime,
           textureSize: Vector2(16, 32),
-          texturePosition: Vector2(16, 32),
+          texturePosition: Vector2(0, 96),
         ),
       );
 

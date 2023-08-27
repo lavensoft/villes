@@ -32,8 +32,8 @@ class Chicken extends SimpleNpc with ObjectCollision {
       // runs every 1 second
       Async.Timer.periodic(const Duration(seconds: 1), (timer) {
         super.moveByVector(Vector2(
-          Random().nextInt(30).toDouble(),
-          Random().nextInt(30).toDouble()
+          Random().nextInt(30).toDouble() - 16,
+          Random().nextInt(30).toDouble() - 16
         ));
       });
 

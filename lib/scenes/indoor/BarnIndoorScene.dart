@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ville/api/main.dart';
-import 'package:ville/api/shyft/ShyftToken.dart';
+import 'package:ville/characters/npc/Chicken.dart';
 import 'package:ville/characters/player/UPlayer.dart';
 import 'package:ville/config/Config.dart';
 import 'package:ville/enums/main.dart';
@@ -9,31 +11,27 @@ import 'package:ville/factories/main.dart';
 import 'package:ville/models/main.dart';
 import 'package:ville/objects/main.dart';
 import 'package:ville/objects/sensors/TeleSensor.dart';
-import 'package:ville/scenes/indoor/BarnIndoorScene.dart';
-import 'package:ville/scenes/indoor/HomeIndoorScene.dart';
+import 'package:ville/scenes/home/HomeOutdoorScene.dart';
 import 'package:ville/ui/MainUI.dart';
-import 'dart:async' as DartAsync;
 
-class HomeOutdoorScene extends StatefulWidget {
-  const HomeOutdoorScene({super.key});
+class BarnIndoorScene extends StatefulWidget {
+  const BarnIndoorScene({super.key});
 
   @override
-  State<HomeOutdoorScene> createState() => _HomeOutdoorSceneState();
+  State<BarnIndoorScene> createState() => _BarnIndoorSceneState();
 }
 
-class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
-  var gameController = GameController();
-  final mapSrc = "maps/PlayerHomeOutdoor1.json";
+class _BarnIndoorSceneState extends State<BarnIndoorScene> {
+  final gameController = GameController();
+  final mapSrc = "maps/Barn.json";
   final mapType = EMapType.IN_DOOR;
+  late Vector2 playerSpawnPos;
+  MPlayer player = MPlayer();
   late MMap mapMeta = MMap(
     id: Config.WALLET_PUBLIC,
     mapSrc: mapSrc,
     type: mapType
   );
-  late Vector2 playerSpawnPos;
-  late List<MInventoryItem> itemsCollect = [];
-  DartAsync.Timer? itemCollectDebounce;
-  MPlayer player = MPlayer();
 
   @override
   void initState() {
@@ -54,43 +52,6 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
       setState(() {
           player = p;
         });
-    });
-  }
-
-  void collectItem(String tokenAddress, int amount) {
-    var itemExist = false;
-    //Update amount if item exist
-    var collects = itemsCollect.map((e) {
-      if(e.tokenAddress == tokenAddress) {
-        e.amount += amount;
-        itemExist = true;
-      }
-
-      return e;
-    }).toList();
-
-    //Add new if not exist
-    if(!itemExist) {
-      collects.add(MInventoryItem(
-        tokenAddress: tokenAddress,
-        amount: amount
-      ));
-    }
-
-    setState(() {
-      itemsCollect = collects;
-    });
-
-    //Burn player energy
-    StatsStore.burnEnergy(10 * amount);
-  
-    if(itemCollectDebounce?.isActive ?? false) itemCollectDebounce?.cancel();
-
-    itemCollectDebounce = DartAsync.Timer(const Duration(milliseconds: 5000), () async { 
-      //Airdrop token collected
-      for(MInventoryItem item in itemsCollect) {
-        await Shyft.token.airdrop(item.tokenAddress, item.amount);
-      }
     });
   }
 
@@ -121,17 +82,38 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
     });
   }
 
+  Future<dynamic> getImage(String path) async {
+    Completer<ImageInfo> completer = Completer();
+    var img = NetworkImage(path);
+    img.resolve(const ImageConfiguration()).addListener(ImageStreamListener((ImageInfo info,bool _){
+      completer.complete(info);
+    }));
+    ImageInfo imageInfo = await completer.future;
+    return imageInfo.image;
+  }
+
   void spawnBuildModeObject({
-    required String objectId,
+    required MInventoryItem item,
     Vector2? position,
     bool buildMode = false
-  }) {
-    var gameObject = GameObjectFactory.createInstance(
-      objectId,
+  }) async {
+
+    var gameObject = DynamicObject(
       position: position ?? Vector2.all(0),
       buildMode: buildMode,
-      onPlace: (position) => addMapMetaDecoration(objectId, position)
+      spriteImage: await getImage(item.spriteSrc!) , 
+      spriteSize: item.spriteSize!, 
+      objectId: item.id,
+      onPlace: (position) {}
     );
+
+
+    // var gameObject = GameObjectFactory.createInstance(
+    //   objectId,
+    //   position: position ?? Vector2.all(0),
+    //   buildMode: buildMode,
+    //   onPlace: (position) => addMapMetaDecoration(objectId, position)
+    // );
 
     // gameController.addGameComponent(component)
     gameController.addGameComponent(gameObject);
@@ -155,12 +137,7 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
 
   //Map teleport
   void mapTeleport(String mapSrc) {
-    if(mapSrc.contains("Barn")) {
-      print("AAA");
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const BarnIndoorScene()));
-    }else{
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const HomeIndoorScene()));
-    }
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const HomeOutdoorScene()));
   }
 
   @override
@@ -196,24 +173,18 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
 
               return SpawnPoint(position: properties.position);
             },
-            "crop": (TiledObjectProperties properties) => MelonCrop(
-              position: properties.position,
-              onCollect: (String tokenAddress) async {
-                //!TODO: Add add amount
-                collectItem(tokenAddress, 1);
-              }
-            )
+            "chicken": (TiledObjectProperties properties) => Chicken(properties.position)
           }
         ),
         player: UPlayer(Vector2.all(0)),
         overlayBuilderMap: {
-        "mainUi": (BuildContext context, BonfireGame game) {
+          "mainUi": (BuildContext context, BonfireGame game) {
             return MainUI(
               onNFTCreate: () => StatsStore.burnEnergy(50),
               player: player,
-              onSpawnBuildObject: (objectId) {
+              onSpawnBuildObject: (item) {
                 spawnBuildModeObject(
-                  objectId: objectId,
+                  item: item,
                   buildMode: true,
                 );
               },

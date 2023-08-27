@@ -1,0 +1,670 @@
+{ "compressionlevel":0,
+ "height":15,
+ "infinite":false,
+ "layers":[
+        {
+         "data":[13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
+            17, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 17,
+            21, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 21,
+            13, 66, 54, 54, 54, 54, 54, 38, 34, 34, 34, 34, 54, 54, 54, 54, 38, 13,
+            13, 37, 13, 26, 13, 53, 13, 57, 54, 54, 47, 54, 54, 13, 26, 13, 56, 13,
+            13, 13, 13, 13, 55, 13, 13, 13, 55, 13, 53, 13, 13, 14, 16, 55, 13, 13,
+            13, 13, 55, 13, 13, 13, 53, 13, 13, 13, 55, 13, 18, 19, 19, 24, 55, 13,
+            13, 13, 55, 13, 55, 13, 55, 13, 13, 53, 13, 13, 18, 19, 20, 13, 13, 13,
+            13, 13, 13, 55, 13, 13, 13, 37, 55, 13, 55, 37, 22, 23, 24, 13, 13, 13,
+            13, 13, 13, 13, 13, 13, 14, 15, 16, 13, 13, 13, 53, 13, 13, 54, 54, 13,
+            13, 13, 13, 13, 13, 13, 18, 19, 20, 13, 13, 13, 14, 15, 16, 13, 13, 13,
+            13, 67, 67, 67, 67, 67, 22, 23, 24, 13, 56, 13, 18, 19, 20, 13, 13, 13,
+            13, 19, 19, 19, 19, 20, 53, 13, 13, 13, 13, 13, 22, 23, 24, 13, 55, 13,
+            13, 22, 23, 23, 19, 20, 55, 37, 13, 13, 55, 13, 13, 37, 13, 13, 14, 13,
+            13, 13, 13, 13, 13, 13, 13, 13, 55, 13, 13, 13, 13, 13, 55, 13, 13, 13],
+         "height":15,
+         "id":1,
+         "name":"Back",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":18,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+            5, 17, 61, 25, 17, 17, 17, 62, 17, 17, 25, 17, 62, 17, 25, 7, 17, 7,
+            5, 21, 21, 21, 48, 21, 21, 29, 30, 30, 30, 30, 31, 21, 21, 7, 21, 7,
+            5, 73, 76, 0, 0, 0, 81, 41, 0, 0, 0, 0, 42, 74, 75, 7, 0, 7,
+            5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7,
+            5, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7,
+            5, 64, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 7,
+            9, 63, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 17, 7,
+            1, 2, 2, 0, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 76, 21, 21, 7,
+            5, 17, 17, 17, 17, 5, 63, 0, 0, 0, 0, 0, 0, 0, 0, 76, 63, 7,
+            5, 21, 21, 21, 21, 5, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
+            5, 43, 44, 73, 43, 5, 64, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
+            5, 0, 0, 0, 0, 5, 76, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 7,
+            5, 0, 0, 0, 0, 5, 76, 76, 64, 63, 0, 0, 0, 0, 0, 58, 76, 7,
+            49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 5, 0, 7, 49, 49, 49, 49, 49],
+         "height":15,
+         "id":2,
+         "name":"Buildings",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":18,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 49, 49,
+            0, 65, 0, 0, 77, 78, 79, 80, 0, 0, 0, 0, 0, 0, 0, 0, 49, 49,
+            0, 69, 72, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 71, 0, 49, 49,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 49,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 49,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 49,
+            0, 59, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+            9, 10, 4, 0, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 7,
+            49, 49, 9, 10, 11, 0, 59, 0, 0, 0, 0, 0, 0, 0, 0, 72, 59, 7,
+            49, 49, 49, 49, 49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 58, 0, 0, 7,
+            49, 49, 49, 49, 49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
+            49, 49, 49, 49, 49, 0, 72, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
+            49, 49, 49, 49, 49, 0, 72, 72, 0, 59, 0, 0, 0, 0, 0, 0, 72, 7,
+            49, 49, 49, 49, 49, 9, 10, 10, 10, 10, 4, 0, 8, 10, 10, 10, 10, 11,
+            0, 49, 49, 0, 0, 0, 49, 49, 49, 49, 9, 10, 11, 49, 49, 49, 49, 49],
+         "height":15,
+         "id":3,
+         "name":"Front",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":18,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 93, 0, 0, 0, 93, 0, 0, 0, 93, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 93, 0, 0, 0, 93, 0, 0, 0, 93, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 0, 0, 0, 0, 0, 0],
+         "height":15,
+         "id":4,
+         "name":"Paths",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":false,
+         "width":18,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"Back",
+         "objects":[
+                {
+                 "height":16,
+                 "id":3,
+                 "name":"spawnPoint",
+                 "properties":[
+                        {
+                         "name":"NoFurniture",
+                         "type":"string",
+                         "value":"t"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":176.340975832417,
+                 "y":144.010845416485
+                }, 
+                {
+                 "height":21.423,
+                 "id":4,
+                 "name":"door",
+                 "properties":[
+                        {
+                         "name":"NoFurniture",
+                         "type":"string",
+                         "value":"t"
+                        }, 
+                        {
+                         "name":"mapSrc",
+                         "type":"string",
+                         "value":"maps\/PlayerHomeOutdoor1.json"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":19.4707,
+                 "x":174.151082371514,
+                 "y":198.411913214079
+                }, 
+                {
+                 "height":16,
+                 "id":5,
+                 "name":"chicken",
+                 "properties":[
+                        {
+                         "name":"NoFurniture",
+                         "type":"string",
+                         "value":"t"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":112.103831699663,
+                 "y":95.8316996629344
+                }, 
+                {
+                 "height":16,
+                 "id":6,
+                 "name":"chicken",
+                 "properties":[
+                        {
+                         "name":"NoFurniture",
+                         "type":"string",
+                         "value":"t"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":208.186897059393,
+                 "y":64.449730734958
+                }, 
+                {
+                 "height":16,
+                 "id":7,
+                 "name":"chicken",
+                 "properties":[
+                        {
+                         "name":"NoFurniture",
+                         "type":"string",
+                         "value":"t"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":239.95629770253,
+                 "y":174.867769555616
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":6,
+         "name":"Buildings",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":7,
+         "name":"Front",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":8,
+         "name":"Paths",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":9,
+ "nextobjectid":8,
+ "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"AmbientLight",
+         "type":"string",
+         "value":"110 110 110"
+        }, 
+        {
+         "name":"DayTiles_asdf",
+         "type":"string",
+         "value":"Buildings 3 1 24 Buildings 10 1 24 Buildings 14 1 24 Back 3 3 25 Back 14 3 25"
+        }, 
+        {
+         "name":"Feed",
+         "type":"string",
+         "value":"5 2"
+        }, 
+        {
+         "name":"Light_asdf",
+         "type":"string",
+         "value":"11 14 6 3 2 6 10 2 6 14 2 6 1 5 4 6 5 4 6 10 4 11 7 4 15 11 4 1 12 4"
+        }, 
+        {
+         "name":"NightTiles_asdf",
+         "type":"string",
+         "value":"Buildings 3 1 26 Buildings 10 1 26 Buildings 14 1 26 Back 3 3 12 Back 14 3 12"
+        }, 
+        {
+         "name":"ProduceArea",
+         "type":"string",
+         "value":"6 4 8 7"
+        }, 
+        {
+         "name":"Warp",
+         "type":"string",
+         "value":"11 15 Farm 14 11"
+        }],
+ "renderorder":"right-down",
+ "tiledversion":"1.10.2",
+ "tileheight":16,
+ "tilesets":[
+        {
+         "columns":4,
+         "firstgid":1,
+         "image":"..\/interiors\/coopTiles.png",
+         "imageheight":336,
+         "imagewidth":64,
+         "margin":0,
+         "name":"barn",
+         "spacing":0,
+         "tilecount":84,
+         "tileheight":16,
+         "tiles":[
+                {
+                 "id":0,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":1,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":2,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":3,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":5,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":11
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":4,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":5,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":6,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":7,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":5,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":11
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":8,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":9,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":5,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":11
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":10,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":11,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":12,
+                 "properties":[
+                        {
+                         "name":"Type",
+                         "type":"string",
+                         "value":"Wood"
+                        }]
+                }, 
+                {
+                 "id":33,
+                 "properties":[
+                        {
+                         "name":"Passable",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"Trough",
+                         "type":"string",
+                         "value":"T"
+                        }]
+                }, 
+                {
+                 "id":53,
+                 "properties":[
+                        {
+                         "name":"Type",
+                         "type":"string",
+                         "value":"Wood"
+                        }]
+                }, 
+                {
+                 "id":54,
+                 "properties":[
+                        {
+                         "name":"Type",
+                         "type":"string",
+                         "value":"Wood"
+                        }]
+                }],
+         "tilewidth":16
+        }, 
+        {
+         "columns":4,
+         "firstgid":85,
+         "image":"..\/Documents\/Game Assets\/Stardew Valley\/Maps\/paths",
+         "imageheight":144,
+         "imagewidth":64,
+         "margin":0,
+         "name":"p",
+         "spacing":0,
+         "tilecount":0,
+         "tileheight":16,
+         "tilewidth":16
+        }],
+ "tilewidth":16,
+ "type":"map",
+ "version":"1.10",
+ "width":18
+}

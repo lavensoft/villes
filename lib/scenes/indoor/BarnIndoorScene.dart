@@ -148,14 +148,21 @@ class _BarnIndoorSceneState extends State<BarnIndoorScene> {
         showCollisionArea: false,
         cameraConfig: CameraConfig(
             zoom: 1, smoothCameraEnabled: true, moveOnlyMapArea: true),
-        joystick: Joystick(
+        joystick:  Joystick(
             keyboardConfig: KeyboardConfig(
-            enable: false,
+            enable: true, // Use to enable ou disable keyboard events (default is true)
             // acceptedKeys: [ // You can pass specific Keys accepted. If null accept all keys
             //   LogicalKeyboardKey.space,
             // ],
-            keyboardDirectionalType: KeyboardDirectionalType.arrows, // Type of the directional (arrows or wasd)
-          ), // Here you enable receive keyboard interaction
+            keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows, // Type of the directional (arrows or wasd)
+          ), // Here you , // Here you enable receive keyboard interaction
+          directional: JoystickDirectional(
+            // spriteBackgroundDirectional: Sprite.load('joystick_background.png'), //directinal control background
+            // spriteKnobDirectional: Sprite.load('joystick_knob.png'), // directional indicator circle background
+            color: Colors.black, // if you do not pass  'pathSpriteBackgroundDirectional' or  'pathSpriteKnobDirectional' you can define a color for the directional.
+            size: 100, // directional control size
+            isFixed: false, // enables directional with dynamic position in relation to the first touch on the screen
+          ),
         ),
         map: WorldMapByTiled(
           mapSrc, 

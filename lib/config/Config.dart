@@ -16,8 +16,11 @@ class  Config {
   static const A_WALLET_PUBLIC = "7TfMNSZ2UHznQBmKF3QJG7VpiF4kKR6Pc9UaFQVfy5zs";
   static const A_WALLET_PRIV = "4EcuTUJM3vauNEkPgSxEU76Lph35hxeNA3ker4zC1HYhRVcoA6Q1pZLtcqM4ZVqajbitjNCGC74Cq2S212zbqwE3";
 
-  static const F_WALLET_PUBLIC = "3bRB21mj2t279iYufzjmJoupUbsrCVDHgUzgWzACHrJu";
-  static const F_WALLET_PRIV = "37WyvsNVM84bSGZhokb1UDAJQqtu14qnQ7aZ5YBBP9YAn7jyAGFgXqRvQCRnaD7iTQRkReC4t5eUZxWVdgkZJ8Au";
+  static const F_WALLET_PUBLIC = "HPryFDafzYYPHq8GLCMkLpRFUbUpYDba9hqj3YAdLcnt";
+  static const F_WALLET_PRIV = "4XMJ5M6wopsvVmBMC8jpShcVETUAAbF2aVKy4ZtqxXDmHUgDcywGhy817vVN2dwJqU6crhWpsoHVtcFAAPRtkGNc";
+
+  static const S_WALLET_PUBLIC = "3bRB21mj2t279iYufzjmJoupUbsrCVDHgUzgWzACHrJu";
+  static const S_WALLET_PRIV = "37WyvsNVM84bSGZhokb1UDAJQqtu14qnQ7aZ5YBBP9YAn7jyAGFgXqRvQCRnaD7iTQRkReC4t5eUZxWVdgkZJ8Au";
 
   //ADDRESS
   static const MARKET_ADDRESS = "DBRY6z5Y3BWME1WqDuxUoJdkAiDwyV7DbzLBFfJG3ZLy";

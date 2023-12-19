@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:ville/characters/player/UPlayer.dart';
 import 'package:ville/config/Config.dart';
 
 class TeleSensor extends GameDecoration with Sensor {
@@ -28,7 +29,8 @@ class TeleSensor extends GameDecoration with Sensor {
 
   @override
   void onContact(GameComponent component) {
-    if(!actived) {
+    if(!actived && component is UPlayer) {
+      print(component);
       onTele(mapSrc);
       actived = true;
     }

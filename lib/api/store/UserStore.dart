@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bonfire/bonfire.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:ville/config/Config.dart';
 import 'package:ville/models/main.dart';
@@ -26,6 +27,13 @@ class UserStore {
         onData(MPlayer().fromMap((data as Map)));
       }
     }); 
+  }
+
+  static Future updatePosition(Vector2 position, Direction direction) async {
+    await database.ref("users/${Config.WALLET_PUBLIC}").update({
+      "position": [position.x, position.y],
+      "direction": direction.index
+    });
   }
 
   static cancelOnValue() async {

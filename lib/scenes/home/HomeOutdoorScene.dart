@@ -2,6 +2,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ville/api/main.dart';
 import 'package:ville/api/shyft/ShyftToken.dart';
+import 'package:ville/characters/player/UNpcPlayer.dart';
 import 'package:ville/characters/player/UPlayer.dart';
 import 'package:ville/config/Config.dart';
 import 'package:ville/enums/main.dart';
@@ -45,6 +46,8 @@ class _HomeOutdoorSceneState extends State<HomeOutdoorScene> {
   //* [PLAYER HANDLERS]
   void initPlayer() async {
     await gameController.mounted;
+
+    gameController.addGameComponent(UNpcPlayer(Vector2(playerSpawnPos.x - 64, playerSpawnPos.y - 64)));
 
     //init location
     gameController.player?.position = playerSpawnPos;

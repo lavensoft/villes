@@ -1,4 +1,6 @@
 # Ville City
+![alt text](https://i.imgur.com/DwNpuer.jpeg)
+
 Ville City is a RPG video game focus to bring a different Economic system to NFT Video game. In this video game, player can do any profession like Farmer or Artist and more. Players can only do things related to the chosen profession for example: 
 
 **Profession:**
